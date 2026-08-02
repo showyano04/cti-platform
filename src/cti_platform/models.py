@@ -18,3 +18,8 @@ class CvssInfo(BaseModel):
     version: str
     base_score: float
     base_severity: str
+
+
+class EnrichedVulnerability(BaseModel):
+    kev: KevEntry
+    cvss: CvssInfo
