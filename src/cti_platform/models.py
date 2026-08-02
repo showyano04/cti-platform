@@ -13,3 +13,8 @@ class KevEntry(BaseModel):
     required_action: str = Field(alias="requiredAction")
     due_date: date = Field(alias="dueDate")
     known_ransomware_use: str = Field(alias="knownRansomwareCampaignUse")
+
+class CvssInfo(BaseModel):
+    version: str
+    base_score: float
+    base_severity: str
