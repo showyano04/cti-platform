@@ -5,7 +5,7 @@ from tenacity import retry, retry_if_exception, stop_after_attempt, wait_exponen
 from cti_platform.models import CvssInfo, KevEntry, VulnerabilityAnalysis
 
 PROMPT_PATH = Path.cwd() / "prompt.md"
-# google-genai SDK 지원 표준 모델명
+# API 목록 확인을 통해 검증된 최신 표준 모델명 사용
 MODEL_NAME = "gemini-2.5-flash"
 
 def _is_retryable(exception: BaseException) -> bool:
