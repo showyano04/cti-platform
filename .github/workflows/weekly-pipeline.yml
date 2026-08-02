@@ -1,0 +1,38 @@
+name: Weekly CTI Pipeline
+
+on:
+  schedule:
+    - cron: "0 0 * * 1"  # 매주 월요일 00:00 UTC (한국 시간 오전 9시)
+  workflow_dispatch:     # 수동 실행 버튼 활성화
+
+permissions:
+  contents: write
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Python 설정
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 의존성 설치
+        run: pip install -e .
+
+      - name: 파이프라인 실행
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+        run: python -m cti_platform.main
+
+      - name: 결과 커밋 및 푸시
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add content/ docs/
+          git diff --staged --quiet || git commit -m "chore: 주간 리포트 자동 생성 ($(date -u +%Y-%m-%d))"
+          git push
