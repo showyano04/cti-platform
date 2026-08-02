@@ -47,7 +47,7 @@ def main() -> None:
 
     report_date = date.today()
     markdown_content = generate_report(top5, report_date)
-    html_content = generate_html(markdown_content, title=f"주간 CTI 리포트 — {report_date.isoformat()}")
+    html_content = generate_html(markdown_content, title=f"주간 주요 취약점(CVE) 분석 리포트 — {report_date.isoformat()}")
 
     OUTPUT_DIR.mkdir(exist_ok=True)
     md_path = OUTPUT_DIR / f"report_{report_date.isoformat()}.md"

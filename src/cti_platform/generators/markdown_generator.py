@@ -4,7 +4,7 @@ from cti_platform.utils import extract_references
 
 def generate_report(vulnerabilities: list[EnrichedVulnerability], report_date: date) -> str:
     """TOP5 취약점으로 주간 Markdown 리포트를 생성한다."""
-    lines = [f"# 주간 CTI 리포트 — {report_date.isoformat()}", ""]
+    lines = [f"# 주간 주요 취약점(CVE) 분석 리포트 — {report_date.isoformat()}", ""]
 
     for rank, vuln in enumerate(vulnerabilities, start=1):
         if not vuln.analysis:
