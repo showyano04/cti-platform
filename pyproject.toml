@@ -7,6 +7,11 @@ dependencies = [
     "requests",
     "pydantic",
     "python-dotenv",
+    "anthropic",
+    "google-generativeai",
+    "google-genai",
+    "markdown",
+    "tenacity",
 ]
 
 [build-system]

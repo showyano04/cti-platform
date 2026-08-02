@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>주간 CTI 리포트 — 2026-08-02</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; }
+        h1, h2, h3 { color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 40px; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+        strong { color: #e74c3c; }
+    </style>
+</head>
+<body>
+<h1>주간 CTI 리포트 — 2026-08-02</h1>
+<h2>1. CVE-2026-16812 — Arista VeloCloud Orchestrator On-Prem OS Command Injection Vulnerability</h2>
+<ul>
+<li><strong>CVSS</strong>: 10.0 (CRITICAL)</li>
+<li><strong>KEV 등재</strong>: 예 (등재일 2026-07-27, 패치 기한 2026-07-30)</li>
+<li><strong>영향 제품</strong>: Arista VeloCloud Orchestrator</li>
+<li><strong>영향 버전(NVD 기준)</strong>: Arista VeloCloud Orchestrator 5.2.0 이상 5.2.3.14 미만, 6.1.0 이상 6.1.3.4 미만, 6.4.0 이상 6.4.2.4 미만, 7.0.0 버전</li>
+<li><strong>랜섬웨어 연관</strong>: Unknown</li>
+</ul>
+<p><strong>개요</strong>: Arista VeloCloud Orchestrator On-Prem 제품에서 발견된 운영체제 명령어 삽입(검증되지 않은 입력 값을 통해 시스템 명령어를 강제로 실행하는 취약점) 취약점입니다. 원격의 공격자가 이를 악용해 특권 내부 기능에 접근하고 시스템 제어권을 확보할 수 있습니다.</p>
+<p><strong>공격 영향</strong>: 원격 공격자가 권한이 필요한 내부 기능에 접근하여 오케스트레이터(여러 IT 자원을 자동으로 통합 관리하는 시스템) 호스트의 제어권을 취득할 수 있습니다. 이로 인해 시스템 및 관리 중인 전체 데이터의 기밀성, 완전성, 가용성이 심각하게 침해될 수 있습니다.</p>
+<p><strong>패치 우선순위</strong>: CVSS 점수가 10.0(치명적)으로 매우 높고 패치 기한이 2026-07-30까지로 지정되어 있어 최우선 패치 적용이 필요합니다. 랜섬웨어 연관 여부는 제공된 데이터에 명시되지 않았으나 원격 공격 위험도가 매우 높으므로 즉시 제조사 지침에 따라 패치하거나 보안 완화 조치를 적용해야 합니다.</p>
+<p><strong>공식 패치·완화조치(CISA 권고)</strong>: Apply mitigations in accordance with vendor instructions, ensuring compliance with CISA’s BOD 26-04 Prioritizing Security Updates Based on Risk (see URL in Notes) guidance and CISA’s “Forensics Triage Requirements” (see URL in Notes). Follow applicable BOD 26-04 guidance for cloud services or discontinue use of the product if mitigations are unavailable. Stakeholders are responsible for evaluating each asset's internet exposure and ensuring adherence to BOD 26-04 patching guidelines.</p>
+<p><strong>운영자 확인 사항</strong>:
+- Arista VeloCloud Orchestrator 제품의 현재 설치 버전을 확인하여 취약 대상 버전인지 점검
+- 제조사 공식 안내에 따라 즉시 최신 보안 패치 적용
+- 오케스트레이터 자원의 인터넷 노출 상태를 평가하고 불필요한 원격 접근 차단
+- CISA BOD 26-04 지침 및 사고 분석 요구사항에 따른 보안 조치 이행
+- 즉각적인 패치가 불가능한 경우 완화 조치 적용 또는 서비스 사용 일시 중단 검토</p>
+<p><strong>참고 자료</strong>: https://www.arista.com/en/support/advisories-notices/security-advisory/24364-security-advisory-0144, https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk, https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk, https://nvd.nist.gov/vuln/detail/CVE-2026-16812</p>
+<h2>2. CVE-2026-50522 — Microsoft SharePoint Deserialization of Untrusted Data Vulnerability</h2>
+<ul>
+<li><strong>CVSS</strong>: 9.8 (CRITICAL)</li>
+<li><strong>KEV 등재</strong>: 예 (등재일 2026-07-22, 패치 기한 2026-07-25)</li>
+<li><strong>영향 제품</strong>: Microsoft SharePoint</li>
+<li><strong>영향 버전(NVD 기준)</strong>: Microsoft SharePoint Server 16.0.19725.20434 미만 버전, Microsoft SharePoint Server 2016, Microsoft SharePoint Server 2019</li>
+<li><strong>랜섬웨어 연관</strong>: Unknown</li>
+</ul>
+<p><strong>개요</strong>: Microsoft SharePoint에서 신뢰할 수 없는 데이터의 역직렬화(외부에서 들어온 검증되지 않은 데이터를 프로그램이 사용하는 객체로 복원하는 과정) 취약점이 발생했습니다. 인증되지 않은 공격자가 네트워크를 통해 대상 시스템에서 임의의 코드를 실행할 수 있습니다.</p>
+<p><strong>공격 영향</strong>: 권한이 없는 공격자가 네트워크를 통해 신뢰할 수 없는 데이터를 전송하고 이를 역직렬화하도록 유도함으로써 원격으로 임의 코드를 실행하고 시스템을 제어할 수 있습니다.</p>
+<p><strong>패치 우선순위</strong>: CVSS 점수가 9.8점으로 심각 등급에 해당하며 패치 기한이 2026년 7월 25일로 지정되어 있어 매우 높은 우선순위로 패치를 적용해야 합니다. 랜섬웨어 연관 여부는 제공된 데이터에 명시되지 않았습니다.</p>
+<p><strong>공식 패치·완화조치(CISA 권고)</strong>: Apply mitigations in accordance with vendor instructions, ensuring compliance with CISA’s BOD 26-04 Prioritizing Security Updates Based on Risk (see URL in Notes) guidance and CISA’s “Forensics Triage Requirements” (see URL in Notes). Follow applicable BOD 26-04 guidance for cloud services or discontinue use of the product if mitigations are unavailable. Stakeholders are responsible for evaluating each asset's internet exposure and ensuring adherence to BOD 26-04 patching guidelines.</p>
+<p><strong>운영자 확인 사항</strong>:
+- 현재 운영 중인 Microsoft SharePoint Server가 16.0.19725.20434 미만 버전이거나 2016, 2019 버전인지 확인합니다.
+- 공급업체의 안내에 따라 보안 업데이트 및 완화 조치를 즉시 적용합니다.
+- 인터넷에 노출되어 있는 SharePoint 자산 현황을 평가합니다.
+- CISA의 포렌식 트리아지(취약점 노출 및 공격 여부를 신속히 침해조사하는 과정) 요구사항 및 보안 업데이트 지침 준수 여부를 점검합니다.</p>
+<p><strong>참고 자료</strong>: https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-50522, https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk, https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk, https://nvd.nist.gov/vuln/detail/CVE-2026-50522</p>
+<h2>3. CVE-2026-16232 — Check Point SmartConsole Improper Authentication Vulnerability</h2>
+<ul>
+<li><strong>CVSS</strong>: 9.1 (CRITICAL)</li>
+<li><strong>KEV 등재</strong>: 예 (등재일 2026-07-22, 패치 기한 2026-07-25)</li>
+<li><strong>영향 제품</strong>: Check Point SmartConsole</li>
+<li><strong>영향 버전(NVD 기준)</strong>: Check Point Multi-Domain Security Management (r77.30 이상 r81.20 미만, r81.20, r82, r82.10), Check Point Quantum Security Management (r77.30 이상 r81.20 미만, r81.20, r82, r82.10)</li>
+<li><strong>랜섬웨어 연관</strong>: Unknown</li>
+</ul>
+<p><strong>개요</strong>: Check Point SmartConsole에서 부적절한 인증(사용자 신원을 올바르게 검증하지 않는 문제) 취약점이 발견되었습니다. 이 취약점으로 인해 인증되지 않은 원격 공격자가 애플리케이션 로그인 토큰(시스템 접속용 디지털 인증 표식)을 획득하고 이를 사용해 최고 관리자 권한으로 로그인할 수 있습니다.</p>
+<p><strong>공격 영향</strong>: 인증을 거치지 않은 원격 공격자가 관리자 권한 토큰을 훔쳐 최고 관리자 권한으로 시스템에 접속함으로써, 대상 관리 시스템에 대한 완전한 통제권을 확보할 수 있습니다.</p>
+<p><strong>패치 우선순위</strong>: CVSS 점수가 9.1로 매우 높으며 CISA 조치 권고에 포함되어 2026년 7월 25일까지 패치 이행이 요구되므로 긴급히 패치를 적용해야 합니다. 랜섬웨어 연관 여부는 알려지지 않았습니다.</p>
+<p><strong>공식 패치·완화조치(CISA 권고)</strong>: Apply mitigations in accordance with vendor instructions, ensuring compliance with CISA’s BOD 26-04 Prioritizing Security Updates Based on Risk (see URL in Notes) guidance and CISA’s “Forensics Triage Requirements” (see URL in Notes). Follow applicable BOD 26-04 guidance for cloud services or discontinue use of the product if mitigations are unavailable. Stakeholders are responsible for evaluating each asset's internet exposure and ensuring adherence to BOD 26-04 patching guidelines.</p>
+<p><strong>운영자 확인 사항</strong>:
+- 공급업체 지침에 따라 보안 패치 및 완화 조치 실행
+- CISA의 BOD 26-04 지침 및 침해사고 대응 분석 요구사항 준수 여부 점검
+- 운영 중인 자산의 인터넷 노출 여부 평가
+- 완화 조치를 적용할 수 없는 제품이나 클라우드 서비스의 경우 사용 중단 검토
+- 2026년 7월 25일 패치 기한 준수를 위한 대응 일정 관리</p>
+<p><strong>참고 자료</strong>: https://support.checkpoint.com/results/sk/sk185169/, https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk, https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk, https://nvd.nist.gov/vuln/detail/CVE-2026-16232</p>
+<h2>4. CVE-2026-63030 — WordPress Core Interpretation Conflict Vulnerability</h2>
+<ul>
+<li><strong>CVSS</strong>: 9.8 (CRITICAL)</li>
+<li><strong>KEV 등재</strong>: 예 (등재일 2026-07-21, 패치 기한 2026-07-24)</li>
+<li><strong>영향 제품</strong>: WordPress Core</li>
+<li><strong>영향 버전(NVD 기준)</strong>: 워드프레스 6.9 이상 6.9.5 미만, 워드프레스 7.0 이상 7.0.2 미만</li>
+<li><strong>랜섬웨어 연관</strong>: Unknown</li>
+</ul>
+<p><strong>개요</strong>: 워드프레스 코어에서 해석 충돌 취약점이 발생하여 공격자가 데이터베이스 구문을 무단 주입하는 SQL Injection을 수행하고, 나아가 시스템 제어권을 확보하는 RCE까지 달성할 수 있습니다. 이 취약점은 CVE-2026-60137 취약점과 연쇄적으로 결합되어 공격에 악용될 수 있습니다.</p>
+<p><strong>공격 영향</strong>: 공격자가 해당 취약점을 악용할 경우 데이터베이스의 정보를 무단 조회·수정할 수 있는 SQL Injection 피해를 입을 수 있으며, 이를 바탕으로 웹 서버에서 악의적인 명령을 직접 실행하는 RCE까지 가능해져 서버 전체가 탈취될 수 있습니다.</p>
+<p><strong>패치 우선순위</strong>: 최우선 적용(CVSS 점수가 9.8로 치명적인 수준이며, SQL Injection 및 RCE 공격으로 이어져 서버 제어권을 상실할 수 있고 연쇄 공격 가능성이 존재하므로 지침에 따라 2026년 7월 24일까지 패치를 완료해야 합니다)</p>
+<p><strong>공식 패치·완화조치(CISA 권고)</strong>: Apply mitigations in accordance with vendor instructions, ensuring compliance with CISA’s BOD 26-04 Prioritizing Security Updates Based on Risk (see URL in Notes) guidance and CISA’s “Forensics Triage Requirements” (see URL in Notes). Follow applicable BOD 26-04 guidance for cloud services or discontinue use of the product if mitigations are unavailable. Stakeholders are responsible for evaluating each asset's internet exposure and ensuring adherence to BOD 26-04 patching guidelines.</p>
+<p><strong>운영자 확인 사항</strong>:
+- 사용 중인 워드프레스 코어 버전을 확인하여 6.9~6.9.4 및 7.0~7.0.1 범위에 해당하는지 점검합니다.
+- 워드프레스 공식 안내에 따라 취약점이 수정된 최신 버전으로 즉시 업데이트를 수행합니다.
+- 연쇄 공격에 악용될 수 있는 CVE-2026-60137 취약점의 조치 여부도 함께 확인합니다.
+- 인터넷에 직접 노출된 워드프레스 자산 목록을 식별하고 CISA BOD 26-04 패치 가이드라인 준수 상태를 점검합니다.
+- 웹 서버 및 데이터베이스 요청 로그를 분석하여 비정상적인 해석 충돌 또는 무단 데이터베이스 접근 시도가 있었는지 침해 조사를 실시합니다.</p>
+<p><strong>참고 자료</strong>: https://wordpress.org/news/2026/07/wordpress-7-0-2-release/, https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk, https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk, https://nvd.nist.gov/vuln/detail/CVE-2026-63030</p>
+<h2>5. CVE-2026-0770 — Langflow Inclusion of Functionality from Untrusted Control Sphere Vulnerability</h2>
+<ul>
+<li><strong>CVSS</strong>: 9.8 (CRITICAL)</li>
+<li><strong>KEV 등재</strong>: 예 (등재일 2026-07-21, 패치 기한 2026-07-24)</li>
+<li><strong>영향 제품</strong>: Langflow Langflow</li>
+<li><strong>영향 버전(NVD 기준)</strong>: langflow/langflow 1.7.3 이하 버전</li>
+<li><strong>랜섬웨어 연관</strong>: Unknown</li>
+</ul>
+<p><strong>개요</strong>: Langflow 제품에서 신뢰할 수 없는 제어 영역의 기능을 포함하여 발생하는 취약점으로, 원격의 공격자가 영향받는 시스템에서 임의 코드를 실행할 수 있습니다.</p>
+<p><strong>공격 영향</strong>: 원격 공격자가 시스템에서 임의의 코드를 실행하여 인가되지 않은 조작을 수행하거나 원격 코드 실행(외부 공격자가 대상 시스템에서 원하는 명령을 임의로 실행하는 공격)을 일으킬 수 있습니다.</p>
+<p><strong>패치 우선순위</strong>: CVSS 점수 9.8의 심각(CRITICAL) 단계 취약점이며 패치 기한이 2026년 7월 24일로 지정되어 있어 최우선으로 대응해야 합니다. 적절한 완화 조치를 적용할 수 없다면 제품 사용 중단을 검토해야 합니다.</p>
+<p><strong>공식 패치·완화조치(CISA 권고)</strong>: Apply mitigations in accordance with vendor instructions, ensuring compliance with CISA’s BOD 26-04 Prioritizing Security Updates Based on Risk (see URL in Notes) guidance and CISA’s “Forensics Triage Requirements” (see URL in Notes). Follow applicable BOD 26-04 guidance for cloud services or discontinue use of the product if mitigations are unavailable. Stakeholders are responsible for evaluating each asset's internet exposure and ensuring adherence to BOD 26-04 patching guidelines.</p>
+<p><strong>운영자 확인 사항</strong>:
+- 운용 중인 Langflow 버전이 1.7.3 이하인지 확인
+- 인터넷 노출 자산 상태 평가 및 위험도 확인
+- 공급업체 지침에 따른 패치 및 완화 조치 실행
+- 패치 적용이 불가능한 경우 제품 사용 중단 검토</p>
+<p><strong>참고 자료</strong>: https://github.com/langflow-ai/langflow/releases/tag/v1.9.0, https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk, https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk, https://nvd.nist.gov/vuln/detail/CVE-2026-0770</p>
+<h2>이번 주 보안 트렌드</h2>
+<ul>
+<li>평균 CVSS: 9.7</li>
+<li>랜섬웨어 연관: 0건 / 5건</li>
+<li>영향받은 벤더: Arista, Check Point, Langflow, Microsoft, WordPress</li>
+</ul>
+<h2>운영자 체크리스트 (종합)</h2>
+<ul>
+<li>Arista VeloCloud Orchestrator 제품의 현재 설치 버전을 확인하여 취약 대상 버전인지 점검</li>
+<li>제조사 공식 안내에 따라 즉시 최신 보안 패치 적용</li>
+<li>오케스트레이터 자원의 인터넷 노출 상태를 평가하고 불필요한 원격 접근 차단</li>
+<li>CISA BOD 26-04 지침 및 사고 분석 요구사항에 따른 보안 조치 이행</li>
+<li>즉각적인 패치가 불가능한 경우 완화 조치 적용 또는 서비스 사용 일시 중단 검토</li>
+<li>현재 운영 중인 Microsoft SharePoint Server가 16.0.19725.20434 미만 버전이거나 2016, 2019 버전인지 확인합니다.</li>
+<li>공급업체의 안내에 따라 보안 업데이트 및 완화 조치를 즉시 적용합니다.</li>
+<li>인터넷에 노출되어 있는 SharePoint 자산 현황을 평가합니다.</li>
+<li>CISA의 포렌식 트리아지(취약점 노출 및 공격 여부를 신속히 침해조사하는 과정) 요구사항 및 보안 업데이트 지침 준수 여부를 점검합니다.</li>
+<li>공급업체 지침에 따라 보안 패치 및 완화 조치 실행</li>
+<li>CISA의 BOD 26-04 지침 및 침해사고 대응 분석 요구사항 준수 여부 점검</li>
+<li>운영 중인 자산의 인터넷 노출 여부 평가</li>
+<li>완화 조치를 적용할 수 없는 제품이나 클라우드 서비스의 경우 사용 중단 검토</li>
+<li>2026년 7월 25일 패치 기한 준수를 위한 대응 일정 관리</li>
+<li>사용 중인 워드프레스 코어 버전을 확인하여 6.9~6.9.4 및 7.0~7.0.1 범위에 해당하는지 점검합니다.</li>
+<li>워드프레스 공식 안내에 따라 취약점이 수정된 최신 버전으로 즉시 업데이트를 수행합니다.</li>
+<li>연쇄 공격에 악용될 수 있는 CVE-2026-60137 취약점의 조치 여부도 함께 확인합니다.</li>
+<li>인터넷에 직접 노출된 워드프레스 자산 목록을 식별하고 CISA BOD 26-04 패치 가이드라인 준수 상태를 점검합니다.</li>
+<li>웹 서버 및 데이터베이스 요청 로그를 분석하여 비정상적인 해석 충돌 또는 무단 데이터베이스 접근 시도가 있었는지 침해 조사를 실시합니다.</li>
+<li>운용 중인 Langflow 버전이 1.7.3 이하인지 확인</li>
+<li>인터넷 노출 자산 상태 평가 및 위험도 확인</li>
+<li>공급업체 지침에 따른 패치 및 완화 조치 실행</li>
+<li>패치 적용이 불가능한 경우 제품 사용 중단 검토</li>
+</ul>
+<h2>이번 주 핵심 요약</h2>
+<p>이번 주는 CVE-2026-16812, CVE-2026-50522, CVE-2026-16232, CVE-2026-63030, CVE-2026-0770 총 5건의 KEV 등재 취약점을 다뤘습니다. 평균 CVSS 9.7, 랜섬웨어 연관 0건입니다.</p>
+</body>
+</html>
