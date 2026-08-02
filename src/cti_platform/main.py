@@ -41,6 +41,10 @@ def main() -> None:
         except Exception as e:
             print(f"  [분석 실패] {e}")
 
+    analyzed_count = sum(1 for v in top5 if v.analysis is not None)
+    if analyzed_count == 0:
+        raise RuntimeError("모든 취약점 분석이 실패했습니다. API 키/시크릿 설정을 확인하세요.")
+
     report_date = date.today()
     markdown_content = generate_report(top5, report_date)
     html_content = generate_html(markdown_content, title=f"주간 CTI 리포트 — {report_date.isoformat()}")
@@ -49,7 +53,6 @@ def main() -> None:
     md_path = OUTPUT_DIR / f"report_{report_date.isoformat()}.md"
     md_path.write_text(markdown_content, encoding="utf-8")
 
-    # GitHub Pages 폴더로 복사 및 인덱스 생성
     published_path = publish_to_github_pages(html_content, report_date)
 
     print(f"\n🎉 리포트 생성 및 배포 준비 완료!")
