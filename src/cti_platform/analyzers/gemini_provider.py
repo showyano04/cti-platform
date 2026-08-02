@@ -5,7 +5,7 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 from cti_platform.models import CvssInfo, KevEntry, VulnerabilityAnalysis
 
 PROMPT_PATH = Path.cwd() / "prompt.md"
-MODEL_NAME = "gemini-3.6-flash"
+MODEL_NAME = "gemini-1.5-flash"
 
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=2, min=2, max=20), reraise=True)
 def analyze_vulnerability(kev: KevEntry, cvss: CvssInfo) -> VulnerabilityAnalysis:
