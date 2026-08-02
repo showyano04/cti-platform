@@ -1,19 +1,33 @@
 from pathlib import Path
 from google import genai
 from google.genai import types
-from tenacity import retry, stop_after_attempt, wait_exponential
+from tenacity import retry, retry_if_exception, stop_after_attempt, wait_exponential
 from cti_platform.models import CvssInfo, KevEntry, VulnerabilityAnalysis
 
 PROMPT_PATH = Path.cwd() / "prompt.md"
-MODEL_NAME = "gemini-1.5-flash"
+# google-genai SDK 지원 표준 모델명
+MODEL_NAME = "gemini-2.5-flash"
 
-@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=2, min=2, max=20), reraise=True)
+def _is_retryable(exception: BaseException) -> bool:
+    """일일 quota 소진(RESOURCE_EXHAUSTED)은 기다려도 풀리지 않으므로 재시도하지 않는다."""
+    return "RESOURCE_EXHAUSTED" not in str(exception)
+
+@retry(
+    stop=stop_after_attempt(3),
+    wait=wait_exponential(multiplier=2, min=2, max=20),
+    retry=retry_if_exception(_is_retryable),
+    reraise=True,
+)
 def analyze_vulnerability(kev: KevEntry, cvss: CvssInfo) -> VulnerabilityAnalysis:
-    """Gemini 무료 티어로 취약점을 분석한다. 일시적 오류(503 등)는 최대 3회 재시도한다."""
+    """Gemini 무료 티어로 취약점을 분석한다."""
     client = genai.Client()
     system_prompt = PROMPT_PATH.read_text(encoding="utf-8")
 
-    affected_text = "; ".join(cvss.affected_configurations) if cvss.affected_configurations else "제공된 데이터에 상세 버전 정보 없음"
+    affected_text = (
+        "; ".join(cvss.affected_configurations)
+        if cvss.affected_configurations
+        else "제공된 데이터에 상세 버전 정보 없음"
+    )
 
     user_content = (
         f"CVE ID: {kev.cve_id}\n"
