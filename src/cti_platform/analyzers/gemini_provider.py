@@ -7,8 +7,9 @@ from cti_platform.models import CvssInfo, KevEntry, VulnerabilityAnalysis
 PROMPT_PATH = Path.cwd() / "prompt.md"
 MODEL_NAME = "gemini-3.6-flash"
 
-@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=2, min=2, max=20))
+@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=2, min=2, max=20), reraise=True)
 def analyze_vulnerability(kev: KevEntry, cvss: CvssInfo) -> VulnerabilityAnalysis:
+    """Gemini 무료 티어로 취약점을 분석한다. 일시적 오류(503 등)는 최대 3회 재시도한다."""
     client = genai.Client()
     system_prompt = PROMPT_PATH.read_text(encoding="utf-8")
 
