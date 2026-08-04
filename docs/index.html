@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>주간 주요 취약점(CVE) 분석 리포트 아카이브</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
     <style>
         :root {
             --bg-color: #f8fafc;
@@ -25,7 +26,7 @@
         .header p { color: #64748b; font-size: 1.1rem; }
         .report-list { display: flex; flex-direction: column; gap: 15px; }
         .report-link { text-decoration: none; color: inherit; }
-        
+
         .report-card {
             display: flex; align-items: center; justify-content: space-between;
             background: var(--card-bg);
@@ -43,9 +44,14 @@
         }
         .report-card .icon { font-size: 1.5rem; margin-right: 15px; }
         .report-card .title { flex-grow: 1; font-weight: 600; font-size: 1.1rem; }
-        .report-card .date { 
-            color: #64748b; font-size: 0.95rem; font-weight: 600; 
-            background: #f1f5f9; padding: 6px 14px; border-radius: 20px; 
+        .report-card .date {
+            color: #64748b; font-size: 0.95rem; font-weight: 600;
+            background: #f1f5f9; padding: 6px 14px; border-radius: 20px;
+        }
+        .latest-badge {
+            color: #fff; font-size: 0.8rem; font-weight: 700;
+            background: var(--primary); padding: 4px 12px; border-radius: 20px;
+            margin-right: 12px;
         }
     </style>
 </head>
@@ -57,10 +63,20 @@
         </div>
         <div class="report-list">
             
+            <a href="reports/report_2026-08-04.html" class="report-link">
+                <div class="report-card">
+                    <span class="icon">🛡️</span>
+                    <span class="title">주간 주요 취약점(CVE) 분석 리포트</span>
+                    <span class="latest-badge">최신</span>
+                    <span class="date">2026-08-04 (화)</span>
+                </div>
+            </a>
+        
             <a href="reports/report_2026-08-03.html" class="report-link">
                 <div class="report-card">
                     <span class="icon">🛡️</span>
                     <span class="title">주간 주요 취약점(CVE) 분석 리포트</span>
+                    
                     <span class="date">2026-08-03 (월)</span>
                 </div>
             </a>
@@ -69,6 +85,7 @@
                 <div class="report-card">
                     <span class="icon">🛡️</span>
                     <span class="title">주간 주요 취약점(CVE) 분석 리포트</span>
+                    
                     <span class="date">2026-08-02 (일)</span>
                 </div>
             </a>
