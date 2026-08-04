@@ -1,6 +1,4 @@
-$content = @'
 import markdown as md
-
 
 def generate_html(markdown_content: str, title: str) -> str:
     body = md.markdown(markdown_content, extensions=["extra"])
@@ -10,7 +8,6 @@ def generate_html(markdown_content: str, title: str) -> str:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
     <style>
         :root {{
             --bg-color: #f3f4f6;
@@ -21,7 +18,7 @@ def generate_html(markdown_content: str, title: str) -> str:
             --border: #e5e7eb;
         }}
         body {{
-            font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             line-height: 1.7;
             color: var(--text-color);
             background-color: var(--bg-color);
@@ -49,21 +46,6 @@ def generate_html(markdown_content: str, title: str) -> str:
         blockquote {{ border-left: 4px solid var(--primary); margin: 0; padding-left: 16px; color: #4b5563; background: #f9fafb; padding: 10px 16px; border-radius: 0 8px 8px 0; }}
         .back-link {{ display: inline-block; margin-bottom: 20px; font-weight: 600; color: #6b7280; }}
         .back-link:hover {{ color: var(--primary); }}
-        .severity-badge {{
-            display: inline-block; padding: 2px 12px; border-radius: 999px;
-            font-size: 0.78rem; font-weight: 700; color: #fff;
-            vertical-align: middle; letter-spacing: 0.02em;
-        }}
-        .sev-critical {{ background: #dc2626; }}
-        .sev-high {{ background: #ea580c; }}
-        .sev-medium {{ background: #d97706; }}
-        .sev-low {{ background: #65a30d; }}
-        .sev-unknown {{ background: #6b7280; }}
-        .ransomware-badge {{
-            display: inline-block; padding: 2px 12px; border-radius: 999px;
-            font-size: 0.78rem; font-weight: 700; color: #991b1b;
-            background: #fee2e2; margin-left: 6px; vertical-align: middle;
-        }}
     </style>
 </head>
 <body>
@@ -73,5 +55,3 @@ def generate_html(markdown_content: str, title: str) -> str:
     </div>
 </body>
 </html>"""
-'@
-[System.IO.File]::WriteAllText("$PWD\src\cti_platform\generators\html_generator.py", $content, [System.Text.UTF8Encoding]::new($false))
