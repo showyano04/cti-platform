@@ -172,8 +172,9 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
         <div class="subscribe-box">
             <h3>💌 보안 위협 트렌드, 놓치지 마세요</h3>
             <p>가장 치명적인 취약점 분석과 방어 가이드를 매일 아침 이메일로 무료 배달해 드립니다.</p>
-            <form class="subscribe-form" onsubmit="alert('구독 기능 연동을 준비 중입니다!'); return false;">
-                <input type="email" placeholder="이메일 주소를 입력하세요" required>
+<!-- 💡 Mailchimp 등 실제 서비스 연동을 위한 표준 폼 형식으로 변경 -->
+            <form class="subscribe-form" action="여기에_메일서비스_구독URL_입력" method="POST" target="_blank">
+                <input type="email" name="EMAIL" placeholder="이메일 주소를 입력하세요" required>
                 <button type="submit">구독하기</button>
             </form>
         </div>

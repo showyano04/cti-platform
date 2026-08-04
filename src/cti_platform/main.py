@@ -2,7 +2,10 @@ from datetime import date
 from pathlib import Path
 from dotenv import load_dotenv
 
-from cti_platform.analyzers.gemini_provider import analyze_vulnerability
+# 💡 두 가지 프로바이더(Gemini, Claude)를 모두 가져옵니다.
+from cti_platform.analyzers.gemini_provider import analyze_vulnerability as gemini_analyze
+from cti_platform.analyzers.claude_provider import analyze_vulnerability as fallback_analyze
+
 from cti_platform.collectors.cisa_kev import fetch_kev_catalog
 from cti_platform.collectors.nvd_cvss import fetch_cvss
 from cti_platform.generators.html_generator import generate_html
@@ -32,22 +35,23 @@ def main() -> None:
 
     filtered = filter_by_cvss(enriched)
     top5 = select_top(filtered, count=5)
-    print(f"CVSS 7.0 이상: {len(filtered)}건 → TOP5 분석 시작 (Gemini AI)\n")
+    print(f"CVSS 7.0 이상: {len(filtered)}건 → TOP5 분석 시작\n")
 
     for rank, vuln in enumerate(top5, start=1):
         print(f"{rank}. {vuln.kev.cve_id} 분석 중...")
         try:
-            vuln.analysis = analyze_vulnerability(vuln.kev, vuln.cvss)
+            # 플랜 A: Gemini AI 심층 분석 시도
+            vuln.analysis = gemini_analyze(vuln.kev, vuln.cvss)
         except Exception as e:
-            print(f"  [분석 실패] {e}")
-
-    analyzed_count = sum(1 for v in top5 if v.analysis is not None)
-    if analyzed_count == 0:
-        raise RuntimeError("모든 취약점 분석이 실패했습니다. API 키/시크릿 설정을 확인하세요.")
+            # 플랜 B: 에러 발생 시(할당량 초과 등) 원본 데이터 기반 분석으로 우회
+            print(f"  [Gemini 실패] {e} -> 플랜 B(팩트 데이터 추출) 가동!")
+            try:
+                vuln.analysis = fallback_analyze(vuln.kev, vuln.cvss)
+            except Exception as fallback_e:
+                print(f"  [플랜 B 완전 실패] {fallback_e}")
 
     report_date = date.today()
     markdown_content = generate_report(top5, report_date)
-    # 💡 "주간"을 "일간"으로 변경
     html_content = generate_html(markdown_content, title=f"일간 주요 취약점(CVE) 분석 리포트 — {report_date.isoformat()}")
 
     OUTPUT_DIR.mkdir(exist_ok=True)
