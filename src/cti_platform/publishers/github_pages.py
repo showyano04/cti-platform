@@ -1,5 +1,7 @@
 from datetime import date
 from pathlib import Path
+from collections import defaultdict
+import json
 
 DOCS_DIR = Path("docs")
 REPORTS_DIR = DOCS_DIR / "reports"
@@ -14,30 +16,52 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
     report_path.write_text(html_content, encoding="utf-8")
 
     weekdays = ["월", "화", "수", "목", "금", "토", "일"]
-
     report_files = sorted(REPORTS_DIR.glob("*.html"), reverse=True)
 
-    list_items = ""
+    # 💡 1. 월별로 리포트 그룹화 및 차트용 통계 수집
+    grouped_reports = defaultdict(list)
+    monthly_counts = defaultdict(int)
+
     for index, file_path in enumerate(report_files):
         date_str = file_path.stem.replace("report_", "")
         try:
             parsed_date = date.fromisoformat(date_str)
             weekday_str = weekdays[parsed_date.weekday()]
             display_text = f"{date_str} ({weekday_str})"
+            group_key = f"{parsed_date.year}년 {parsed_date.month}월"
+            monthly_counts[group_key] += 1
         except ValueError:
             display_text = date_str
+            group_key = "기타"
 
         latest_badge = '<span class="latest-badge">최신</span>' if index == 0 else ""
-
-        list_items += f"""
+        
+        card_html = f"""
             <a href="reports/{file_path.name}" class="report-link">
                 <div class="report-card">
-                    <span class="icon">🚨</span>
+                    <span class="icon">🛡️</span>
                     <span class="title">주간 주요 취약점(CVE) 분석 리포트</span>
                     {latest_badge}
                     <span class="date">{display_text}</span>
                 </div>
             </a>
+        """
+        grouped_reports[group_key].append(card_html)
+
+    # 💡 2. 차트 데이터 정렬 (최근 월이 오른쪽으로 가도록 역순 배치)
+    chart_labels = list(reversed(list(monthly_counts.keys())[:6]))
+    chart_data = list(reversed(list(monthly_counts.values())[:6]))
+
+    # 💡 3. 그룹화된 HTML 조립
+    list_items_html = ""
+    for month, cards in grouped_reports.items():
+        list_items_html += f"""
+            <div class="month-group">
+                <h2 class="month-title">{month}</h2>
+                <div class="report-list">
+                    {"".join(cards)}
+                </div>
+            </div>
         """
 
     index_html = f"""<!DOCTYPE html>
@@ -45,9 +69,10 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 💡 요청하신 브라우저 탭 제목 변경 -->
-    <title>CVE 보안 취약점 분석 모음</title> 
+    <title>CVE 보안 취약점 분석 모음</title>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+    <!-- Chart.js 라이브러리 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {{
             --bg-color: #f8fafc;
@@ -63,27 +88,36 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
             color: var(--text-color);
             margin: 0; padding: 40px 20px;
         }}
-        .container {{ max-width: 800px; margin: 0 auto; }}
-        .header {{ text-align: center; margin-bottom: 50px; }}
+        .container {{ max-width: 850px; margin: 0 auto; }}
+        .header {{ text-align: center; margin-bottom: 40px; }}
         .header h1 {{ font-size: 2.2rem; color: #1e293b; margin-bottom: 10px; font-weight: 800; }}
         .header p {{ color: #64748b; font-size: 1.1rem; }}
+        
+        .dashboard {{
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: 12px; padding: 25px; margin-bottom: 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }}
+        .dashboard-title {{ font-size: 1.2rem; font-weight: 700; margin-bottom: 20px; color: #1e293b; }}
+        
+        .month-group {{ margin-bottom: 40px; }}
+        .month-title {{ 
+            font-size: 1.3rem; color: #334155; font-weight: 800;
+            border-bottom: 2px solid var(--border); 
+            padding-bottom: 10px; margin-bottom: 15px; 
+        }}
+        
         .report-list {{ display: flex; flex-direction: column; gap: 15px; }}
         .report-link {{ text-decoration: none; color: inherit; }}
-
         .report-card {{
             display: flex; align-items: center; justify-content: space-between;
-            background: var(--card-bg);
-            padding: 20px 25px;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            transition: all 0.2s ease-in-out;
+            background: var(--card-bg); padding: 20px 25px;
+            border: 1px solid var(--border); border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.2s ease-in-out;
         }}
         .report-card:hover {{
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-            border-color: var(--primary);
-            background-color: var(--hover-bg);
+            transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            border-color: var(--primary); background-color: var(--hover-bg);
         }}
         .report-card .icon {{ font-size: 1.5rem; margin-right: 15px; }}
         .report-card .title {{ flex-grow: 1; font-weight: 600; font-size: 1.1rem; }}
@@ -101,14 +135,42 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
 <body>
     <div class="container">
         <div class="header">
-            <!-- 💡 요청하신 아이콘 및 제목 변경 -->
             <h1>🛡️ CVE 보안 취약점 분석 모음</h1> 
             <p>CISA KEV 및 NVD 데이터를 기반으로 자동 분석된 주간 리포트 모음입니다.</p>
         </div>
-        <div class="report-list">
-            {list_items}
+        
+        <!-- 대시보드 차트 영역 -->
+        <div class="dashboard">
+            <div class="dashboard-title">📊 월별 취약점 리포트 발행 추이</div>
+            <canvas id="trendChart" height="80"></canvas>
+        </div>
+
+        <div class="archive">
+            {list_items_html}
         </div>
     </div>
+
+    <!-- 차트 렌더링 스크립트 -->
+    <script>
+        const ctx = document.getElementById('trendChart').getContext('2d');
+        new Chart(ctx, {{
+            type: 'bar',
+            data: {{
+                labels: {json.dumps(chart_labels)},
+                datasets: [{{
+                    label: '발행된 리포트 수',
+                    data: {json.dumps(chart_data)},
+                    backgroundColor: '#3b82f6',
+                    borderRadius: 6
+                }}]
+            }},
+            options: {{
+                responsive: true,
+                plugins: {{ legend: {{ display: false }} }},
+                scales: {{ y: {{ beginAtZero: true, ticks: {{ stepSize: 1 }} }} }}
+            }}
+        }});
+    </script>
 </body>
 </html>"""
 
