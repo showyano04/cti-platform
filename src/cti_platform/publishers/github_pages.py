@@ -13,7 +13,7 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
     report_path = REPORTS_DIR / report_filename
     report_path.write_text(html_content, encoding="utf-8")
 
-    weekdays = ["\uC6D4", "\uD654", "\uC218", "\uBAA9", "\uAE08", "\uD1A0", "\uC77C"]
+    weekdays = ["월", "화", "수", "목", "금", "토", "일"]
 
     report_files = sorted(REPORTS_DIR.glob("*.html"), reverse=True)
 
@@ -27,12 +27,12 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
         except ValueError:
             display_text = date_str
 
-        latest_badge = '<span class="latest-badge">\uCD5C\uC2E0</span>' if index == 0 else ""
+        latest_badge = '<span class="latest-badge">최신</span>' if index == 0 else ""
 
         list_items += f"""
             <a href="reports/{file_path.name}" class="report-link">
                 <div class="report-card">
-                    <span class="icon">\U0001F6E1\uFE0F</span>
+                    <span class="icon">🚨</span>
                     <span class="title">주간 주요 취약점(CVE) 분석 리포트</span>
                     {latest_badge}
                     <span class="date">{display_text}</span>
@@ -45,7 +45,8 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>주간 주요 취약점(CVE) 분석 리포트 아카이브</title>
+    <!-- 💡 요청하신 브라우저 탭 제목 변경 -->
+    <title>CVE 보안 취약점 분석 모음</title> 
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
     <style>
         :root {{
@@ -64,7 +65,7 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
         }}
         .container {{ max-width: 800px; margin: 0 auto; }}
         .header {{ text-align: center; margin-bottom: 50px; }}
-        .header h1 {{ font-size: 2.2rem; color: #1e293b; margin-bottom: 10px; }}
+        .header h1 {{ font-size: 2.2rem; color: #1e293b; margin-bottom: 10px; font-weight: 800; }}
         .header p {{ color: #64748b; font-size: 1.1rem; }}
         .report-list {{ display: flex; flex-direction: column; gap: 15px; }}
         .report-link {{ text-decoration: none; color: inherit; }}
@@ -100,7 +101,8 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
 <body>
     <div class="container">
         <div class="header">
-            <h1>\U0001F3AF 주요 취약점(CVE) 분석 아카이브</h1>
+            <!-- 💡 요청하신 아이콘 및 제목 변경 -->
+            <h1>🛡️ CVE 보안 취약점 분석 모음</h1> 
             <p>CISA KEV 및 NVD 데이터를 기반으로 자동 분석된 주간 리포트 모음입니다.</p>
         </div>
         <div class="report-list">
