@@ -1,6 +1,5 @@
 import markdown as md
 
-
 def generate_html(markdown_content: str, title: str) -> str:
     body = md.markdown(markdown_content, extensions=["extra"])
     return f"""<!DOCTYPE html>
@@ -9,6 +8,12 @@ def generate_html(markdown_content: str, title: str) -> str:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
+    <!-- 💡 SEO 및 소셜 미디어 공유 최적화(OpenGraph) -->
+    <meta name="description" content="CISA KEV 및 NVD 기반 최신 보안 취약점 심층 분석 리포트">
+    <meta property="og:title" content="{title}">
+    <meta property="og:description" content="가장 치명적인 보안 취약점 정보와 운영자 방어 가이드를 확인하세요.">
+    <meta property="og:type" content="article">
+    
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
     <style>
         :root {{

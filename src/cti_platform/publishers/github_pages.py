@@ -39,7 +39,6 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
             <a href="reports/{file_path.name}" class="report-link">
                 <div class="report-card">
                     <span class="icon">🛡️</span>
-                    <!-- 💡 "주간" -> "일간" -->
                     <span class="title">일간 주요 취약점(CVE) 분석 리포트</span>
                     {latest_badge}
                     <span class="date">{display_text}</span>
@@ -68,6 +67,12 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CVE 보안 취약점 분석 모음</title>
+    <!-- 💡 메인 페이지 SEO 최적화 -->
+    <meta name="description" content="매일 업데이트되는 최신 보안 취약점(CVE) 동향 및 방어 가이드. 사이버 위협 인텔리전스를 무료로 구독하세요.">
+    <meta name="keywords" content="CVE, 보안 취약점, 정보보안, CTI, 랜섬웨어, CISA KEV">
+    <meta property="og:title" content="CVE 보안 취약점 분석 모음">
+    <meta property="og:description" content="사이버 보안 담당자를 위한 일간 취약점 요약 리포트">
+    
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -86,10 +91,32 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
             margin: 0; padding: 40px 20px;
         }}
         .container {{ max-width: 850px; margin: 0 auto; }}
-        .header {{ text-align: center; margin-bottom: 40px; }}
+        .header {{ text-align: center; margin-bottom: 30px; }}
         .header h1 {{ font-size: 2.2rem; color: #1e293b; margin-bottom: 10px; font-weight: 800; }}
         .header p {{ color: #64748b; font-size: 1.1rem; }}
         
+        /* 💡 구독 폼 CSS */
+        .subscribe-box {{
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border: 1px solid #bfdbfe; border-radius: 12px;
+            padding: 25px 30px; margin-bottom: 40px; text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1);
+        }}
+        .subscribe-box h3 {{ margin: 0 0 10px 0; color: #1e40af; font-size: 1.3rem; }}
+        .subscribe-box p {{ margin: 0 0 20px 0; color: #3b82f6; font-size: 0.95rem; }}
+        .subscribe-form {{ display: flex; gap: 10px; justify-content: center; max-width: 500px; margin: 0 auto; }}
+        .subscribe-form input {{
+            flex-grow: 1; padding: 12px 15px; border: 1px solid #cbd5e1;
+            border-radius: 8px; font-size: 1rem; outline: none;
+        }}
+        .subscribe-form input:focus {{ border-color: var(--primary); box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); }}
+        .subscribe-form button {{
+            background-color: var(--primary); color: white; border: none;
+            padding: 12px 25px; border-radius: 8px; font-size: 1rem;
+            font-weight: 600; cursor: pointer; transition: background-color 0.2s;
+        }}
+        .subscribe-form button:hover {{ background-color: #2563eb; }}
+
         .dashboard {{
             background: var(--card-bg); border: 1px solid var(--border);
             border-radius: 12px; padding: 25px; margin-bottom: 40px;
@@ -127,16 +154,30 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
             background: var(--primary); padding: 4px 12px; border-radius: 20px;
             margin-right: 12px;
         }}
+        
+        @media (max-width: 600px) {{
+            .subscribe-form {{ flex-direction: column; }}
+            .subscribe-form button {{ width: 100%; }}
+        }}
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>🛡️ CVE 보안 취약점 분석 모음</h1> 
-            <!-- 💡 "주간" -> "일간" -->
             <p>CISA KEV 및 NVD 데이터를 기반으로 자동 분석된 일간 리포트 모음입니다.</p>
         </div>
         
+        <!-- 💡 수익화를 위한 뉴스레터 구독 폼 -->
+        <div class="subscribe-box">
+            <h3>💌 보안 위협 트렌드, 놓치지 마세요</h3>
+            <p>가장 치명적인 취약점 분석과 방어 가이드를 매일 아침 이메일로 무료 배달해 드립니다.</p>
+            <form class="subscribe-form" onsubmit="alert('구독 기능 연동을 준비 중입니다!'); return false;">
+                <input type="email" placeholder="이메일 주소를 입력하세요" required>
+                <button type="submit">구독하기</button>
+            </form>
+        </div>
+
         <div class="dashboard">
             <div class="dashboard-title">📊 월별 취약점 리포트 발행 추이</div>
             <canvas id="trendChart" height="80"></canvas>
@@ -158,7 +199,7 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
                     data: {json.dumps(chart_data)},
                     backgroundColor: '#3b82f6',
                     borderRadius: 6,
-                    maxBarThickness: 50 // 💡 차트 막대 뚱뚱해지는 현상 방지!
+                    maxBarThickness: 50
                 }}]
             }},
             options: {{
