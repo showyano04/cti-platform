@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>일간 주요 취약점(CVE) 분석 리포트 — 2026-08-04</title>
+    <!-- 💡 SEO 및 소셜 미디어 공유 최적화(OpenGraph) -->
+    <meta name="description" content="CISA KEV 및 NVD 기반 최신 보안 취약점 심층 분석 리포트">
+    <meta property="og:title" content="일간 주요 취약점(CVE) 분석 리포트 — 2026-08-04">
+    <meta property="og:description" content="가장 치명적인 보안 취약점 정보와 운영자 방어 가이드를 확인하세요.">
+    <meta property="og:type" content="article">
+    
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
     <style>
         :root {
@@ -69,20 +75,19 @@
 <li><strong>CVSS</strong>: 10.0 <span class="severity-badge sev-critical">CRITICAL</span></li>
 <li><strong>KEV 등재</strong>: 예 (등재일 2026-07-27, 패치 기한 2026-07-30)</li>
 <li><strong>영향 제품</strong>: Arista VeloCloud Orchestrator</li>
-<li><strong>영향 버전(NVD 기준)</strong>: Arista VeloCloud Orchestrator의 5.2.0 이상 5.2.3.14 미만 버전, 6.1.0 이상 6.1.3.4 미만 버전, 6.4.0 이상 6.4.2.4 미만 버전, 그리고 7.0.0 버전이 영향을 받습니다.</li>
+<li><strong>영향 버전(NVD 기준)</strong>: Arista VeloCloud Orchestrator On-Prem 제품의 다음 버전이 영향을 받습니다: 5.2.0 이상 5.2.3.14 미만, 6.1.0 이상 6.1.3.4 미만, 6.4.0 이상 6.4.2.4 미만, 그리고 7.0.0 버전.</li>
 <li><strong>랜섬웨어 연관</strong>: Unknown</li>
 </ul>
-<p><strong>개요</strong>: Arista VeloCloud Orchestrator On-Prem 제품에서 OS 명령 삽입(OS Command Injection) 취약점(CVE-2026-16812)이 발견되었습니다. 이 취약점은 원격 공격자가 악용하여 시스템의 특권 내부 기능에 접근하고 VeloCloud Orchestrator 호스트에 영향을 미칠 수 있습니다.</p>
-<p><strong>공격 영향</strong>: 이 취약점은 원격 공격자가 시스템에 명령을 주입하여 실행할 수 있게 함으로써, VeloCloud Orchestrator의 기밀성(정보 유출), 무결성(데이터 변조), 가용성(서비스 중단)을 모두 심각하게 침해할 수 있습니다. 공격자는 오케스트레이터가 관리하는 데이터를 포함하여 중요한 내부 시스템 기능에 접근하여 시스템 전체를 장악할 수 있습니다. 이는 CVSS v3.1 점수 10.0(CRITICAL)로 평가될 정도로 매우 심각한 보안 위험을 초래합니다.</p>
-<p><strong>패치 우선순위</strong>: CVSS v3.1 점수 10.0(CRITICAL)으로 매우 높은 심각도를 가집니다. CISA는 공급업체 지침에 따라 완화 조치를 적용하거나, 완화 조치가 없는 경우 제품 사용을 중단할 것을 강력히 권고하고 있으며, 2026년 7월 30일까지 패치를 적용하도록 명시되어 있으므로 최우선으로 패치해야 합니다. 랜섬웨어 연관 여부는 제공된 데이터에 명시되지 않았습니다.</p>
+<p><strong>개요</strong>: Arista VeloCloud Orchestrator On-Prem 제품에서 운영 체제 명령어 삽입(공격자가 취약한 시스템에서 임의의 운영 체제 명령어를 실행할 수 있도록 하는 취약점) 취약점이 발견되었습니다. 이 취약점은 원격 공격자가 특권이 있는 내부 기능에 접근하여 VeloCloud Orchestrator 호스트에 영향을 미칠 수 있도록 허용합니다.</p>
+<p><strong>공격 영향</strong>: 이 취약점을 성공적으로 악용할 경우, 원격 공격자는 Arista VeloCloud Orchestrator On-Prem 시스템에서 임의의 운영 체제 명령어를 실행할 수 있습니다. 이는 시스템의 기밀성(예: 민감 데이터 유출), 무결성(예: 데이터 변조 또는 삭제), 가용성(예: 서비스 중단 또는 시스템 마비)에 심각한 영향을 미칠 수 있습니다. 공격자는 오케스트레이터 호스트에 대한 제어권을 확보하고, 이를 통해 관리되는 네트워크 인프라 및 데이터에도 추가적인 위협을 가할 수 있습니다.</p>
+<p><strong>패치 우선순위</strong>: 이 취약점은 CVSS 3.1 점수 10.0으로 '심각(CRITICAL)' 등급입니다. CISA KEV 목록 등재 여부 및 랜섬웨어 연관성은 제공된 데이터에 명시되지 않았습니다. 하지만 최고 등급의 심각성과 CISA의 권고, 그리고 2026년 7월 30일까지의 패치 기한을 고려할 때, 즉시 최우선으로 패치해야 합니다.</p>
 <p><strong>공식 패치·완화조치(CISA 권고)</strong>: Apply mitigations in accordance with vendor instructions, ensuring compliance with CISA’s BOD 26-04 Prioritizing Security Updates Based on Risk (see URL in Notes) guidance and CISA’s “Forensics Triage Requirements” (see URL in Notes). Follow applicable BOD 26-04 guidance for cloud services or discontinue use of the product if mitigations are unavailable. Stakeholders are responsible for evaluating each asset's internet exposure and ensuring adherence to BOD 26-04 patching guidelines.</p>
 <p><strong>운영자 확인 사항</strong>:
-- 현재 운영 중인 Arista VeloCloud Orchestrator 제품이 있는지 확인합니다.
-- 운영 중인 Arista VeloCloud Orchestrator의 정확한 버전을 확인하여 위에 명시된 취약한 버전에 해당하는지 파악합니다.
-- 취약한 버전이 확인된 경우, Arista에서 제공하는 패치 또는 완화 조치를 즉시 적용합니다.
-- CISA의 BOD 26-04 지침에 따라 보안 업데이트 우선순위를 지정하고 적용해야 합니다.
-- 영향을 받는 Arista VeloCloud Orchestrator 자산의 인터넷 노출 여부를 평가하고, 필요한 경우 접근 제어를 강화합니다.
-- 만약 공급업체로부터 적절한 완화 조치가 제공되지 않는다면, CISA 권고에 따라 해당 제품 사용 중단을 고려해야 합니다.</p>
+- 현재 사용 중인 Arista VeloCloud Orchestrator On-Prem 제품의 버전을 확인하고, 영향받는 버전에 해당하는지 여부를 식별합니다.
+- 벤더(Arista)에서 제공하는 최신 보안 업데이트나 패치를 신속하게 확인하고 적용하여 취약점을 해결합니다.
+- 벤더 지침에 따라 추가적인 완화 조치(예: 접근 제어 강화, 네트워크 세그멘테이션)가 있는지 확인하고 적용합니다.
+- 시스템 및 네트워크 로그를 주기적으로 검토하여 비정상적인 활동이나 잠재적인 침해 시도를 탐지합니다.
+- CISA의 BOD 26-04 지침에 따라 위험 기반 보안 업데이트 우선순위를 준수하고 관련 조치를 취합니다.</p>
 <p><strong>참고 자료</strong>:
 - <a href="https://www.arista.com/en/support/advisories-notices/security-advisory/24364-security-advisory-0144">https://www.arista.com/en/support/advisories-notices/security-advisory/24364-security-advisory-0144</a>
 - <a href="https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk">https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk</a>
@@ -93,43 +98,29 @@
 <li><strong>CVSS</strong>: 9.8 <span class="severity-badge sev-critical">CRITICAL</span></li>
 <li><strong>KEV 등재</strong>: 예 (등재일 2026-07-22, 패치 기한 2026-07-25)</li>
 <li><strong>영향 제품</strong>: Microsoft SharePoint</li>
-<li><strong>영향 버전(NVD 기준)</strong>: Microsoft SharePoint Server 버전 16.0.19725.20434 미만, Microsoft SharePoint Server 2016, Microsoft SharePoint Server 2019가 영향을 받습니다.</li>
-<li><strong>랜섬웨어 연관</strong>: Unknown</li>
+<li><strong>영향 버전</strong>: 확인 불가 (데이터 없음)</li>
 </ul>
-<p><strong>개요</strong>: CVE-2026-50522는 Microsoft SharePoint 제품에서 발견된 역직렬화(외부에서 받은 데이터를 프로그램이 다룰 수 있는 형태로 복원하는 과정) 취약점입니다. 이 취약점을 이용하면 권한 없는 공격자가 네트워크를 통해 시스템에서 임의의 코드를 실행할 수 있습니다. CVSS 점수는 9.8점으로 심각도가 매우 높습니다.</p>
-<p><strong>공격 영향</strong>: 이 취약점은 권한 없는 공격자가 네트워크를 통해 악성 코드를 SharePoint 서버에서 직접 실행할 수 있게 합니다. 공격에 성공할 경우, 공격자는 서버의 제어권을 탈취하여 중요 데이터를 유출하거나 변조, 삭제할 수 있으며, 시스템 기능을 완전히 마비시키거나 다른 내부 시스템으로 추가 공격을 시도할 수도 있습니다. 이는 조직의 핵심 서비스 운영에 심각한 영향을 미칠 수 있습니다.</p>
-<p><strong>패치 우선순위</strong>: CVSS 점수가 9.8점(CRITICAL)으로 매우 높고, CISA에서 즉각적인 조치를 권고하고 있으므로 최우선적으로 패치를 적용해야 합니다. 랜섬웨어 연관성은 제공된 데이터에 명시되지 않았으나, 심각성을 고려할 때 조속한 대응이 필요합니다.</p>
-<p><strong>공식 패치·완화조치(CISA 권고)</strong>: Apply mitigations in accordance with vendor instructions, ensuring compliance with CISA’s BOD 26-04 Prioritizing Security Updates Based on Risk (see URL in Notes) guidance and CISA’s “Forensics Triage Requirements” (see URL in Notes). Follow applicable BOD 26-04 guidance for cloud services or discontinue use of the product if mitigations are unavailable. Stakeholders are responsible for evaluating each asset's internet exposure and ensuring adherence to BOD 26-04 patching guidelines.</p>
-<p><strong>운영자 확인 사항</strong>:
-- 현재 운영 중인 Microsoft SharePoint Server가 영향받는 버전에 해당하는지 즉시 확인합니다.
-- 영향받는 시스템이 확인될 경우, Microsoft에서 제공하는 최신 보안 업데이트를 적용하여 취약점을 해결합니다.
-- CISA의 BOD 26-04 지침(위험 기반 보안 업데이트 우선순위 지정)에 따라 패치 적용 및 완화 조치를 최우선으로 시행합니다.
-- 패치 적용이 즉시 어려운 경우, CISA 권고에 따라 제품 사용 중단을 고려하거나, 추가적인 완화 대책 마련을 위한 면밀한 검토를 수행합니다.
-- 패치 적용 후 시스템이 정상적으로 동작하는지 모니터링하고, 잠재적인 위협 활동에 대한 로그 분석을 강화합니다.</p>
-<p><strong>참고 자료</strong>:
-- <a href="https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-50522">https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-50522</a>
-- <a href="https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk">https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk</a>
-- <a href="https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk">https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk</a>
-- <a href="https://nvd.nist.gov/vuln/detail/CVE-2026-50522">https://nvd.nist.gov/vuln/detail/CVE-2026-50522</a></p>
+<blockquote>
+<p>⚠️ <strong>AI 분석 보류</strong>: 일일 API 할당량 초과 또는 네트워크 오류로 인해 심층 분석을 가져오지 못했습니다. 기본 CVE 정보만 제공됩니다.</p>
+</blockquote>
 <h2>3. CVE-2026-16232 — Check Point SmartConsole Improper Authentication Vulnerability</h2>
 <ul>
 <li><strong>CVSS</strong>: 9.1 <span class="severity-badge sev-critical">CRITICAL</span></li>
 <li><strong>KEV 등재</strong>: 예 (등재일 2026-07-22, 패치 기한 2026-07-25)</li>
 <li><strong>영향 제품</strong>: Check Point SmartConsole</li>
-<li><strong>영향 버전(NVD 기준)</strong>: Check Point Multi-Domain Security Management R77.30 이상 R81.20 미만 버전, R81.20 버전, R82 버전, R82.10 버전; Check Point Quantum Security Management R77.30 이상 R81.20 미만 버전, R81.20 버전, R82 버전, R82.10 버전이 영향을 받습니다.</li>
+<li><strong>영향 버전(NVD 기준)</strong>: Check Point Multi-Domain Security Management의 r77.30 이상 r81.20 미만 버전과 r81.20, r82, r82.10 버전이 영향을 받습니다. 또한 Check Point Quantum Security Management의 r77.30 이상 r81.20 미만 버전과 r81.20, r82, r82.10 버전도 영향을 받습니다. 특정 버전 정보가 명시되지 않은 일부 제품군도 포함됩니다.</li>
 <li><strong>랜섬웨어 연관</strong>: Unknown</li>
 </ul>
-<p><strong>개요</strong>: CVE-2026-16232은 Check Point SmartConsole에서 발견된 부적절한 인증(시스템이 사용자의 신원을 제대로 확인하지 못하는 것) 취약점입니다. 이 취약점을 통해 인증되지 않은 원격 공격자가 애플리케이션 로그인 토큰을 탈취하여 최고 관리자 권한으로 시스템에 접근할 수 있습니다.</p>
-<p><strong>공격 영향</strong>: 이 취약점이 성공적으로 악용될 경우, 공격자는 별도의 인증 절차 없이 Check Point SmartConsole 시스템에 대한 완전한 관리자 권한을 획득할 수 있습니다. 이는 시스템 설정 변경, 데이터 접근 및 변조, 서비스 중단 등 심각한 보안 위협으로 이어질 수 있으며, 공격자가 조직의 보안 인프라를 완전히 통제할 가능성이 있습니다.</p>
-<p><strong>패치 우선순위</strong>: 이 취약점은 CVSS 9.1점으로 'CRITICAL' 등급으로 분류되며, CISA KEV(Known Exploited Vulnerabilities) 목록 등재 여부와 랜섬웨어 연관 여부는 제공된 데이터에 명시되지 않았습니다. 그러나 최고 관리자 권한 탈취 가능성이 있으므로 즉각적인 패치 적용이 필요합니다. CISA 권고에 따라 2026년 7월 25일까지 조치를 완료해야 합니다.</p>
+<p><strong>개요</strong>: CVE-2026-16232은 Check Point SmartConsole에서 발견된 부적절한 인증 취약점입니다. 인증되지 않은 원격 공격자가 애플리케이션 로그인 토큰을 획득하여 최고 관리자 권한(full administrative privileges)으로 시스템에 인증할 수 있도록 허용합니다.</p>
+<p><strong>공격 영향</strong>: 인증되지 않은 원격 공격자가 취약점을 악용하여 SmartConsole의 로그인 토큰을 탈취할 수 있습니다. 이 토큰을 사용하면 공격자는 시스템에 최고 관리자 권한으로 로그인하여 시스템의 모든 기능에 접근하고 설정 및 데이터를 임의로 변경하거나 제어할 수 있습니다. 이는 시스템의 기밀성, 무결성, 가용성에 심각한 영향을 미칠 수 있습니다.</p>
+<p><strong>패치 우선순위</strong>: 이 취약점은 CVSS 9.1점으로 '심각(CRITICAL)' 등급에 해당하며, CISA가 2026년 7월 25일까지 패치를 권고하는 긴급 업데이트 사항입니다. 따라서 최우선적으로 패치를 적용해야 합니다. KEV(Known Exploited Vulnerabilities) 등재 여부와 랜섬웨어 연관성은 제공된 데이터에 명시되지 않았습니다.</p>
 <p><strong>공식 패치·완화조치(CISA 권고)</strong>: Apply mitigations in accordance with vendor instructions, ensuring compliance with CISA’s BOD 26-04 Prioritizing Security Updates Based on Risk (see URL in Notes) guidance and CISA’s “Forensics Triage Requirements” (see URL in Notes). Follow applicable BOD 26-04 guidance for cloud services or discontinue use of the product if mitigations are unavailable. Stakeholders are responsible for evaluating each asset's internet exposure and ensuring adherence to BOD 26-04 patching guidelines.</p>
 <p><strong>운영자 확인 사항</strong>:
-- 영향받는 Check Point SmartConsole 및 관련 제품(Multi-Domain Security Management, Quantum Security Management)의 버전을 즉시 확인합니다.
-- Check Point 벤더의 공식 보안 권고 및 패치 정보를 확인하고, 사용 가능한 최신 보안 업데이트를 지체 없이 적용합니다.
-- SmartConsole에 대한 모든 관리자 로그인 시도를 면밀히 모니터링하고, 비정상적인 접근이나 의심스러운 활동이 감지될 경우 즉시 조사합니다.
-- Check Point SmartConsole 시스템이 불필요하게 외부 네트워크에 노출되어 있는지 확인하고, 필요한 경우 방화벽 규칙 강화, VPN 사용 등 접근 통제 정책을 엄격하게 적용합니다.
-- CISA의 BOD 26-04 지침에 따라 보안 업데이트 우선순위를 지정하고, 제시된 패치 기한(2026년 7월 25일) 내에 모든 권고 조치를 완료합니다.
-- 잠재적인 침해에 대비하여 CISA의 'Forensics Triage Requirements'에 따라 시스템 로그 및 관련 데이터의 수집, 보관 계획을 수립하고 점검합니다.</p>
+- 현재 운영 중인 Check Point SmartConsole 및 관련 제품(Multi-Domain Security Management, Quantum Security Management)의 버전을 즉시 확인합니다.
+- 영향받는 버전을 사용하는 시스템을 식별하고, 벤더사(Check Point)에서 제공하는 공식 패치 또는 보안 업데이트를 확인하여 적용합니다.
+- 벤더사 지침에 따라 완화 조치를 적용하고, CISA의 BOD 26-04(위험 기반 보안 업데이트 우선순위 지정) 지침을 준수합니다.
+- 만약 완화 조치나 패치가 불가능한 경우, CISA 권고에 따라 해당 제품의 사용 중단을 고려합니다.
+- 모든 자산의 인터넷 노출 여부를 평가하고, BOD 26-04 패치 지침을 준수하는지 확인합니다.</p>
 <p><strong>참고 자료</strong>:
 - <a href="https://support.checkpoint.com/results/sk/sk185169/">https://support.checkpoint.com/results/sk/sk185169/</a>
 - <a href="https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk">https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk</a>
@@ -163,23 +154,16 @@
 </ul>
 <h2>운영자 체크리스트 (종합)</h2>
 <ul>
-<li>현재 운영 중인 Arista VeloCloud Orchestrator 제품이 있는지 확인합니다.</li>
-<li>운영 중인 Arista VeloCloud Orchestrator의 정확한 버전을 확인하여 위에 명시된 취약한 버전에 해당하는지 파악합니다.</li>
-<li>취약한 버전이 확인된 경우, Arista에서 제공하는 패치 또는 완화 조치를 즉시 적용합니다.</li>
-<li>CISA의 BOD 26-04 지침에 따라 보안 업데이트 우선순위를 지정하고 적용해야 합니다.</li>
-<li>영향을 받는 Arista VeloCloud Orchestrator 자산의 인터넷 노출 여부를 평가하고, 필요한 경우 접근 제어를 강화합니다.</li>
-<li>만약 공급업체로부터 적절한 완화 조치가 제공되지 않는다면, CISA 권고에 따라 해당 제품 사용 중단을 고려해야 합니다.</li>
-<li>현재 운영 중인 Microsoft SharePoint Server가 영향받는 버전에 해당하는지 즉시 확인합니다.</li>
-<li>영향받는 시스템이 확인될 경우, Microsoft에서 제공하는 최신 보안 업데이트를 적용하여 취약점을 해결합니다.</li>
-<li>CISA의 BOD 26-04 지침(위험 기반 보안 업데이트 우선순위 지정)에 따라 패치 적용 및 완화 조치를 최우선으로 시행합니다.</li>
-<li>패치 적용이 즉시 어려운 경우, CISA 권고에 따라 제품 사용 중단을 고려하거나, 추가적인 완화 대책 마련을 위한 면밀한 검토를 수행합니다.</li>
-<li>패치 적용 후 시스템이 정상적으로 동작하는지 모니터링하고, 잠재적인 위협 활동에 대한 로그 분석을 강화합니다.</li>
-<li>영향받는 Check Point SmartConsole 및 관련 제품(Multi-Domain Security Management, Quantum Security Management)의 버전을 즉시 확인합니다.</li>
-<li>Check Point 벤더의 공식 보안 권고 및 패치 정보를 확인하고, 사용 가능한 최신 보안 업데이트를 지체 없이 적용합니다.</li>
-<li>SmartConsole에 대한 모든 관리자 로그인 시도를 면밀히 모니터링하고, 비정상적인 접근이나 의심스러운 활동이 감지될 경우 즉시 조사합니다.</li>
-<li>Check Point SmartConsole 시스템이 불필요하게 외부 네트워크에 노출되어 있는지 확인하고, 필요한 경우 방화벽 규칙 강화, VPN 사용 등 접근 통제 정책을 엄격하게 적용합니다.</li>
-<li>CISA의 BOD 26-04 지침에 따라 보안 업데이트 우선순위를 지정하고, 제시된 패치 기한(2026년 7월 25일) 내에 모든 권고 조치를 완료합니다.</li>
-<li>잠재적인 침해에 대비하여 CISA의 'Forensics Triage Requirements'에 따라 시스템 로그 및 관련 데이터의 수집, 보관 계획을 수립하고 점검합니다.</li>
+<li>현재 사용 중인 Arista VeloCloud Orchestrator On-Prem 제품의 버전을 확인하고, 영향받는 버전에 해당하는지 여부를 식별합니다.</li>
+<li>벤더(Arista)에서 제공하는 최신 보안 업데이트나 패치를 신속하게 확인하고 적용하여 취약점을 해결합니다.</li>
+<li>벤더 지침에 따라 추가적인 완화 조치(예: 접근 제어 강화, 네트워크 세그멘테이션)가 있는지 확인하고 적용합니다.</li>
+<li>시스템 및 네트워크 로그를 주기적으로 검토하여 비정상적인 활동이나 잠재적인 침해 시도를 탐지합니다.</li>
+<li>CISA의 BOD 26-04 지침에 따라 위험 기반 보안 업데이트 우선순위를 준수하고 관련 조치를 취합니다.</li>
+<li>현재 운영 중인 Check Point SmartConsole 및 관련 제품(Multi-Domain Security Management, Quantum Security Management)의 버전을 즉시 확인합니다.</li>
+<li>영향받는 버전을 사용하는 시스템을 식별하고, 벤더사(Check Point)에서 제공하는 공식 패치 또는 보안 업데이트를 확인하여 적용합니다.</li>
+<li>벤더사 지침에 따라 완화 조치를 적용하고, CISA의 BOD 26-04(위험 기반 보안 업데이트 우선순위 지정) 지침을 준수합니다.</li>
+<li>만약 완화 조치나 패치가 불가능한 경우, CISA 권고에 따라 해당 제품의 사용 중단을 고려합니다.</li>
+<li>모든 자산의 인터넷 노출 여부를 평가하고, BOD 26-04 패치 지침을 준수하는지 확인합니다.</li>
 </ul>
 <h2>오늘의 핵심 요약</h2>
 <p>오늘은 CVE-2026-16812, CVE-2026-50522, CVE-2026-16232, CVE-2026-63030, CVE-2026-0770 총 5건의 KEV 등재 취약점을 다뤘습니다. 평균 CVSS 9.7, 랜섬웨어 연관 0건입니다.</p>
