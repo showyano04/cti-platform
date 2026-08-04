@@ -107,12 +107,15 @@
             <p>CISA KEV 및 NVD 데이터를 기반으로 자동 분석된 일간 리포트 모음입니다.</p>
         </div>
         
-        <!-- 💡 수익화를 위한 뉴스레터 구독 폼 (스티비 완벽 연동) -->
+        <!-- 💡 수익화를 위한 뉴스레터 구독 폼 (스티비 완벽 연동 & 리다이렉션 방지) -->
         <div class="subscribe-box">
             <h3>💌 보안 위협 트렌드, 놓치지 마세요</h3>
             <p>가장 치명적인 취약점 분석과 방어 가이드를 매일 아침 이메일로 무료 배달해 드립니다.</p>
             
-            <form action="https://stibee.com/api/v1.0/lists/Fq0wk-IeC6XA-E6OrGrJIaUp5635UQ==/public/subscribers" method="POST" target="_blank" accept-charset="utf-8">
+            <!-- 구린 스티비 결과창을 삼켜버릴 숨겨진 iframe -->
+            <iframe name="hidden_iframe" style="display:none;"></iframe>
+            
+            <form action="https://stibee.com/api/v1.0/lists/Fq0wk-IeC6XA-E6OrGrJIaUp5635UQ==/public/subscribers" method="POST" target="hidden_iframe" accept-charset="utf-8" onsubmit="showSubscribeAlert()">
                 <div class="subscribe-form-group">
                     <input type="email" name="email" placeholder="이메일 주소를 입력하세요" required>
                     <button type="submit">구독하기</button>
@@ -171,6 +174,15 @@
     </div>
 
     <script>
+        // 폼 제출 시 알림창을 띄우고 입력칸을 비워주는 함수
+        function showSubscribeAlert() {
+            setTimeout(function() {
+                alert("💌 구독 확인 메일이 발송되었습니다!\n입력하신 메일함을 확인해주세요. (스팸함도 확인 부탁드립니다)");
+                document.querySelector('input[name="email"]').value = '';
+                document.getElementById('stb_policy').checked = false;
+            }, 600);
+        }
+
         const ctx = document.getElementById('trendChart').getContext('2d');
         new Chart(ctx, {
             type: 'bar',
