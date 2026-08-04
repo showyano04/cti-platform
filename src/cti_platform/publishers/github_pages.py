@@ -18,7 +18,6 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
     weekdays = ["월", "화", "수", "목", "금", "토", "일"]
     report_files = sorted(REPORTS_DIR.glob("*.html"), reverse=True)
 
-    # 💡 1. 월별로 리포트 그룹화 및 차트용 통계 수집
     grouped_reports = defaultdict(list)
     monthly_counts = defaultdict(int)
 
@@ -40,7 +39,8 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
             <a href="reports/{file_path.name}" class="report-link">
                 <div class="report-card">
                     <span class="icon">🛡️</span>
-                    <span class="title">주간 주요 취약점(CVE) 분석 리포트</span>
+                    <!-- 💡 "주간" -> "일간" -->
+                    <span class="title">일간 주요 취약점(CVE) 분석 리포트</span>
                     {latest_badge}
                     <span class="date">{display_text}</span>
                 </div>
@@ -48,11 +48,9 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
         """
         grouped_reports[group_key].append(card_html)
 
-    # 💡 2. 차트 데이터 정렬 (최근 월이 오른쪽으로 가도록 역순 배치)
     chart_labels = list(reversed(list(monthly_counts.keys())[:6]))
     chart_data = list(reversed(list(monthly_counts.values())[:6]))
 
-    # 💡 3. 그룹화된 HTML 조립
     list_items_html = ""
     for month, cards in grouped_reports.items():
         list_items_html += f"""
@@ -71,7 +69,6 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CVE 보안 취약점 분석 모음</title>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
-    <!-- Chart.js 라이브러리 추가 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {{
@@ -136,10 +133,10 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
     <div class="container">
         <div class="header">
             <h1>🛡️ CVE 보안 취약점 분석 모음</h1> 
-            <p>CISA KEV 및 NVD 데이터를 기반으로 자동 분석된 주간 리포트 모음입니다.</p>
+            <!-- 💡 "주간" -> "일간" -->
+            <p>CISA KEV 및 NVD 데이터를 기반으로 자동 분석된 일간 리포트 모음입니다.</p>
         </div>
         
-        <!-- 대시보드 차트 영역 -->
         <div class="dashboard">
             <div class="dashboard-title">📊 월별 취약점 리포트 발행 추이</div>
             <canvas id="trendChart" height="80"></canvas>
@@ -150,7 +147,6 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
         </div>
     </div>
 
-    <!-- 차트 렌더링 스크립트 -->
     <script>
         const ctx = document.getElementById('trendChart').getContext('2d');
         new Chart(ctx, {{
@@ -161,7 +157,8 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
                     label: '발행된 리포트 수',
                     data: {json.dumps(chart_data)},
                     backgroundColor: '#3b82f6',
-                    borderRadius: 6
+                    borderRadius: 6,
+                    maxBarThickness: 50 // 💡 차트 막대 뚱뚱해지는 현상 방지!
                 }}]
             }},
             options: {{
