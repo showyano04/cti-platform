@@ -1,4 +1,3 @@
-$content = @'
 from datetime import date
 from pathlib import Path
 
@@ -113,5 +112,3 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
 
     INDEX_FILE.write_text(index_html, encoding="utf-8")
     return report_path
-'@
-[System.IO.File]::WriteAllText("$PWD\src\cti_platform\publishers\github_pages.py", $content, [System.Text.UTF8Encoding]::new($false))
