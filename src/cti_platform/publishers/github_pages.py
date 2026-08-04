@@ -104,18 +104,20 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
         }}
         .subscribe-box h3 {{ margin: 0 0 10px 0; color: #1e40af; font-size: 1.3rem; }}
         .subscribe-box p {{ margin: 0 0 20px 0; color: #3b82f6; font-size: 0.95rem; }}
-        .subscribe-form {{ display: flex; gap: 10px; justify-content: center; max-width: 500px; margin: 0 auto; }}
-        .subscribe-form input {{
+        
+        .subscribe-form-group {{ display: flex; gap: 10px; justify-content: center; max-width: 500px; margin: 0 auto; }}
+        .subscribe-form-group input[type="email"] {{
             flex-grow: 1; padding: 12px 15px; border: 1px solid #cbd5e1;
             border-radius: 8px; font-size: 1rem; outline: none;
         }}
-        .subscribe-form input:focus {{ border-color: var(--primary); box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); }}
-        .subscribe-form button {{
+        .subscribe-form-group input[type="email"]:focus {{ border-color: var(--primary); box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); }}
+        .subscribe-form-group button {{
             background-color: var(--primary); color: white; border: none;
             padding: 12px 25px; border-radius: 8px; font-size: 1rem;
-            font-weight: 600; cursor: pointer; transition: background-color 0.2s;
+            font-weight: 600; cursor: pointer; transition: background-color 0.2s; white-space: nowrap;
         }}
-        .subscribe-form button:hover {{ background-color: #2563eb; }}
+        .subscribe-form-group button:hover {{ background-color: #2563eb; }}
+        .policy-group {{ margin-top: 15px; font-size: 0.85rem; color: #64748b; }}
 
         .dashboard {{
             background: var(--card-bg); border: 1px solid var(--border);
@@ -156,8 +158,8 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
         }}
         
         @media (max-width: 600px) {{
-            .subscribe-form {{ flex-direction: column; }}
-            .subscribe-form button {{ width: 100%; }}
+            .subscribe-form-group {{ flex-direction: column; }}
+            .subscribe-form-group button {{ width: 100%; }}
         }}
     </style>
 </head>
@@ -168,14 +170,22 @@ def publish_to_github_pages(html_content: str, report_date: date) -> Path:
             <p>CISA KEV 및 NVD 데이터를 기반으로 자동 분석된 일간 리포트 모음입니다.</p>
         </div>
         
-        <!-- 💡 수익화를 위한 뉴스레터 구독 폼 -->
+        <!-- 💡 수익화를 위한 뉴스레터 구독 폼 (스티비 완벽 연동) -->
         <div class="subscribe-box">
             <h3>💌 보안 위협 트렌드, 놓치지 마세요</h3>
             <p>가장 치명적인 취약점 분석과 방어 가이드를 매일 아침 이메일로 무료 배달해 드립니다.</p>
-<!-- 💡 Mailchimp 등 실제 서비스 연동을 위한 표준 폼 형식으로 변경 -->
-            <form class="subscribe-form" action="여기에_메일서비스_구독URL_입력" method="POST" target="_blank">
-                <input type="email" name="EMAIL" placeholder="이메일 주소를 입력하세요" required>
-                <button type="submit">구독하기</button>
+            
+            <form action="https://stibee.com/api/v1.0/lists/Fq0wk-IeC6XA-E6OrGrJIaUp5635UQ==/public/subscribers" method="POST" target="_blank" accept-charset="utf-8">
+                <div class="subscribe-form-group">
+                    <input type="email" name="email" placeholder="이메일 주소를 입력하세요" required>
+                    <button type="submit">구독하기</button>
+                </div>
+                <div class="policy-group">
+                    <label>
+                        <input type="checkbox" id="stb_policy" name="stb_policy" value="stb_policy_true" required>
+                        개인정보 수집 및 이용에 동의합니다. (필수)
+                    </label>
+                </div>
             </form>
         </div>
 
