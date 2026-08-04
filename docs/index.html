@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CVE 보안 취약점 분석 모음</title>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
-    <!-- Chart.js 라이브러리 추가 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
@@ -70,10 +69,10 @@
     <div class="container">
         <div class="header">
             <h1>🛡️ CVE 보안 취약점 분석 모음</h1> 
-            <p>CISA KEV 및 NVD 데이터를 기반으로 자동 분석된 주간 리포트 모음입니다.</p>
+            <!-- 💡 "주간" -> "일간" -->
+            <p>CISA KEV 및 NVD 데이터를 기반으로 자동 분석된 일간 리포트 모음입니다.</p>
         </div>
         
-        <!-- 대시보드 차트 영역 -->
         <div class="dashboard">
             <div class="dashboard-title">📊 월별 취약점 리포트 발행 추이</div>
             <canvas id="trendChart" height="80"></canvas>
@@ -88,7 +87,8 @@
             <a href="reports/report_2026-08-04.html" class="report-link">
                 <div class="report-card">
                     <span class="icon">🛡️</span>
-                    <span class="title">주간 주요 취약점(CVE) 분석 리포트</span>
+                    <!-- 💡 "주간" -> "일간" -->
+                    <span class="title">일간 주요 취약점(CVE) 분석 리포트</span>
                     <span class="latest-badge">최신</span>
                     <span class="date">2026-08-04 (화)</span>
                 </div>
@@ -97,7 +97,8 @@
             <a href="reports/report_2026-08-03.html" class="report-link">
                 <div class="report-card">
                     <span class="icon">🛡️</span>
-                    <span class="title">주간 주요 취약점(CVE) 분석 리포트</span>
+                    <!-- 💡 "주간" -> "일간" -->
+                    <span class="title">일간 주요 취약점(CVE) 분석 리포트</span>
                     
                     <span class="date">2026-08-03 (월)</span>
                 </div>
@@ -106,7 +107,8 @@
             <a href="reports/report_2026-08-02.html" class="report-link">
                 <div class="report-card">
                     <span class="icon">🛡️</span>
-                    <span class="title">주간 주요 취약점(CVE) 분석 리포트</span>
+                    <!-- 💡 "주간" -> "일간" -->
+                    <span class="title">일간 주요 취약점(CVE) 분석 리포트</span>
                     
                     <span class="date">2026-08-02 (일)</span>
                 </div>
@@ -118,7 +120,6 @@
         </div>
     </div>
 
-    <!-- 차트 렌더링 스크립트 -->
     <script>
         const ctx = document.getElementById('trendChart').getContext('2d');
         new Chart(ctx, {
@@ -129,7 +130,8 @@
                     label: '발행된 리포트 수',
                     data: [3],
                     backgroundColor: '#3b82f6',
-                    borderRadius: 6
+                    borderRadius: 6,
+                    maxBarThickness: 50 // 💡 차트 막대 뚱뚱해지는 현상 방지!
                 }]
             },
             options: {
