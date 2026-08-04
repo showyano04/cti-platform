@@ -1,6 +1,4 @@
-$content = @'
 from datetime import date
-
 from cti_platform.models import EnrichedVulnerability
 from cti_platform.utils import extract_references
 
@@ -11,28 +9,38 @@ _SEVERITY_CLASS = {
     "LOW": "sev-low",
 }
 
-
 def _severity_badge(severity: str) -> str:
     css_class = _SEVERITY_CLASS.get(severity, "sev-unknown")
     return f'<span class="severity-badge {css_class}">{severity}</span>'
 
-
 def _ransomware_badge(known_ransomware_use: str) -> str:
     if known_ransomware_use == "Known":
-        return ' <span class="ransomware-badge">\U0001F525 \uB79C\uC12C\uC6E8\uC5B4 \uC5F0\uAD00</span>'
+        return ' <span class="ransomware-badge">🔥 랜섬웨어 연관</span>'
     return ""
-
 
 def generate_report(vulnerabilities: list[EnrichedVulnerability], report_date: date) -> str:
     """TOP5 취약점으로 주간 Markdown 리포트를 생성한다."""
     lines = [f"# 주간 주요 취약점(CVE) 분석 리포트 — {report_date.isoformat()}", ""]
 
     for rank, vuln in enumerate(vulnerabilities, start=1):
+        # 💡 API 할당량 초과 등으로 분석 결과가 없을 때의 방어막 (에러 방지)
         if not vuln.analysis:
+            lines += [
+                f"## {rank}. {vuln.kev.cve_id} — {vuln.kev.vulnerability_name}",
+                "",
+                f"- **CVSS**: {vuln.cvss.base_score} {_severity_badge(vuln.cvss.base_severity)}",
+                f"- **KEV 등재**: 예 (등재일 {vuln.kev.date_added}, 패치 기한 {vuln.kev.due_date})",
+                f"- **영향 제품**: {vuln.kev.vendor_project} {vuln.kev.product}",
+                "- **영향 버전**: 확인 불가",
+                "",
+                "> ⚠️ **AI 분석 보류**: 일일 API 할당량 초과 또는 네트워크 오류로 인해 심층 분석을 가져오지 못했습니다.",
+                ""
+            ]
             continue
 
         analysis = vuln.analysis
         references = extract_references(vuln.kev.notes)
+        
         lines += [
             f"## {rank}. {vuln.kev.cve_id} — {vuln.kev.vulnerability_name}",
             "",
@@ -52,9 +60,11 @@ def generate_report(vulnerabilities: list[EnrichedVulnerability], report_date: d
             "",
             "**운영자 확인 사항**:",
         ]
+        
         lines += [f"- {item}" for item in analysis.operator_checklist]
         lines.append("")
         lines.append("**참고 자료**:")
+        
         if references:
             lines += [f"- [{ref}]({ref})" for ref in references]
         else:
@@ -64,11 +74,14 @@ def generate_report(vulnerabilities: list[EnrichedVulnerability], report_date: d
     lines += _build_weekly_summary(vulnerabilities)
     return "\n".join(lines)
 
-
 def _build_weekly_summary(vulnerabilities: list[EnrichedVulnerability]) -> list[str]:
     ransomware_count = sum(1 for v in vulnerabilities if v.kev.known_ransomware_use == "Known")
     vendors = sorted({v.kev.vendor_project for v in vulnerabilities})
-    avg_cvss = sum(v.cvss.base_score for v in vulnerabilities) / len(vulnerabilities)
+    
+    avg_cvss = 0.0
+    if vulnerabilities:
+        avg_cvss = sum(v.cvss.base_score for v in vulnerabilities) / len(vulnerabilities)
+        
     all_items = [item for v in vulnerabilities if v.analysis for item in v.analysis.operator_checklist]
     deduped_checklist = list(dict.fromkeys(all_items))
 
@@ -89,5 +102,3 @@ def _build_weekly_summary(vulnerabilities: list[EnrichedVulnerability]) -> list[
         f"KEV 등재 취약점을 다뤘습니다. 평균 CVSS {avg_cvss:.1f}, 랜섬웨어 연관 {ransomware_count}건입니다.",
         "",
     ]
-'@
-[System.IO.File]::WriteAllText("$PWD\src\cti_platform\generators\markdown_generator.py", $content, [System.Text.UTF8Encoding]::new($false))
