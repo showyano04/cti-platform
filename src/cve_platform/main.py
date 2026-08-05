@@ -3,17 +3,17 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 # 💡 두 가지 프로바이더(Gemini, Claude)를 모두 가져옵니다.
-from cti_platform.analyzers.gemini_provider import analyze_vulnerability as gemini_analyze
-from cti_platform.analyzers.claude_provider import analyze_vulnerability as fallback_analyze
+from cve_platform.analyzers.gemini_provider import analyze_vulnerability as gemini_analyze
+from cve_platform.analyzers.claude_provider import analyze_vulnerability as fallback_analyze
 
-from cti_platform.collectors.cisa_kev import fetch_kev_catalog
-from cti_platform.collectors.nvd_cvss import fetch_cvss
-from cti_platform.generators.html_generator import generate_html
-from cti_platform.generators.markdown_generator import generate_report
-from cti_platform.models import EnrichedVulnerability
-from cti_platform.processors.filter import filter_by_cvss
-from cti_platform.processors.ranker import select_top
-from cti_platform.publishers.github_pages import publish_to_github_pages
+from cve_platform.collectors.cisa_kev import fetch_kev_catalog
+from cve_platform.collectors.nvd_cvss import fetch_cvss
+from cve_platform.generators.html_generator import generate_html
+from cve_platform.generators.markdown_generator import generate_report
+from cve_platform.models import EnrichedVulnerability
+from cve_platform.processors.filter import filter_by_cvss
+from cve_platform.processors.ranker import select_top
+from cve_platform.publishers.github_pages import publish_to_github_pages
 
 load_dotenv()
 
