@@ -1,8 +1,8 @@
-from pathlib import Path
+﻿from pathlib import Path
 from google import genai
 from google.genai import types
 from tenacity import retry, retry_if_exception, stop_after_attempt, wait_exponential
-from cti_platform.models import CvssInfo, KevEntry, VulnerabilityAnalysis
+from cve_platform.models import CvssInfo, KevEntry, VulnerabilityAnalysis
 
 PROMPT_PATH = Path.cwd() / "prompt.md"
 # API 목록 확인을 통해 검증된 최신 표준 모델명 사용

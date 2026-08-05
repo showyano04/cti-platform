@@ -1,4 +1,4 @@
-from cti_platform.models import EnrichedVulnerability
+﻿from cve_platform.models import EnrichedVulnerability
 
 CVSS_THRESHOLD = 7.0
 

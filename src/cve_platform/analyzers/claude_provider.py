@@ -1,4 +1,4 @@
-from cti_platform.models import CvssInfo, KevEntry, VulnerabilityAnalysis
+﻿from cve_platform.models import CvssInfo, KevEntry, VulnerabilityAnalysis
 
 def analyze_vulnerability(kev: KevEntry, cvss: CvssInfo) -> VulnerabilityAnalysis:
     """

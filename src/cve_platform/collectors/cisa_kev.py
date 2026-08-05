@@ -1,6 +1,6 @@
-import requests
+﻿import requests
 
-from cti_platform.models import KevEntry
+from cve_platform.models import KevEntry
 
 KEV_FEED_URL = "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
 REQUEST_TIMEOUT_SECONDS = 30

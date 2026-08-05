@@ -1,4 +1,4 @@
-from cti_platform.models import EnrichedVulnerability
+﻿from cve_platform.models import EnrichedVulnerability
 
 
 def select_top(candidates: list[EnrichedVulnerability], count: int = 5) -> list[EnrichedVulnerability]:

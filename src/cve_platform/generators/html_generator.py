@@ -1,4 +1,4 @@
-import markdown as md
+﻿import markdown as md
 
 def generate_html(markdown_content: str, title: str) -> str:
     body = md.markdown(markdown_content, extensions=["extra"])

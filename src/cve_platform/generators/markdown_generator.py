@@ -1,6 +1,6 @@
-from datetime import date
-from cti_platform.models import EnrichedVulnerability
-from cti_platform.utils import extract_references
+﻿from datetime import date
+from cve_platform.models import EnrichedVulnerability
+from cve_platform.utils import extract_references
 
 _SEVERITY_CLASS = {
     "CRITICAL": "sev-critical",

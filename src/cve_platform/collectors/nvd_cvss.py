@@ -1,7 +1,7 @@
-import os
+﻿import os
 import time
 import requests
-from cti_platform.models import CvssInfo
+from cve_platform.models import CvssInfo
 
 NVD_CVE_API_URL = "https://services.nvd.nist.gov/rest/json/cves/2.0"
 REQUEST_TIMEOUT_SECONDS = 30
