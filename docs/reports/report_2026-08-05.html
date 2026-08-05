@@ -75,19 +75,19 @@
 <li><strong>CVSS</strong>: 9.8 <span class="severity-badge sev-critical">CRITICAL</span></li>
 <li><strong>KEV 등재</strong>: 예 (등재일 2026-08-04, 패치 기한 2026-08-07)</li>
 <li><strong>영향 제품</strong>: IBM Langflow</li>
-<li><strong>영향 버전(NVD 기준)</strong>: IBM Langflow 1.0.0 버전 이상부터 1.10.1 버전 미만의 제품이 영향을 받습니다. 제공된 데이터에 상세 버전 정보는 명시되지 않았습니다.</li>
+<li><strong>영향 버전(NVD 기준)</strong>: langflow/langflow 버전 1.0.0 이상 1.10.1 미만</li>
 <li><strong>랜섬웨어 연관</strong>: Unknown</li>
 </ul>
-<p><strong>개요</strong>: IBM Langflow 제품에서 인증되지 않은 공격자가 원격 코드 실행(RCE)을 수행할 수 있는 코드 주입 취약점이 발견되었습니다. 이 취약점을 통해 공격자는 기본 설정으로 배포된 Langflow 시스템에 대해 완전한 제어 권한을 얻을 수 있습니다.</p>
-<p><strong>공격 영향</strong>: 이 취약점은 인증되지 않은 공격자가 원격으로 악성 코드를 시스템에 주입하여 실행할 수 있도록 허용합니다. 이는 공격자가 영향받는 Langflow 시스템에 대해 완전한 제어 권한(원격 코드 실행)을 획득하고, 데이터 유출, 시스템 파괴, 추가적인 악성코드 설치 등 광범위한 피해를 초래할 수 있음을 의미합니다.</p>
-<p><strong>패치 우선순위</strong>: CVSS 9.8점으로 매우 심각(CRITICAL)하며, CISA가 BOD 26-04 지침에 따라 즉각적인 완화 조치를 권고하고 2026년 8월 7일까지의 패치 기한을 지정했습니다. 랜섬웨어 연관성은 현재 알려지지 않았으나, 인증되지 않은 원격 코드 실행이 가능한 점을 고려할 때 최우선적으로 패치 및 완화 조치가 필요합니다.</p>
+<p><strong>개요</strong>: IBM Langflow 제품에서 인증되지 않은 공격자가 원격 코드 실행(RCE)을 수행할 수 있는 코드 인젝션 취약점(CVE-2026-9198)이 발견되었습니다. 이 취약점은 Langflow의 기본 배포 환경에서 악용될 수 있습니다.</p>
+<p><strong>공격 영향</strong>: 공격자는 이 취약점을 이용해 시스템에 임의의 코드를 실행할 수 있습니다. 이는 시스템의 데이터 유출, 변조, 삭제는 물론, 시스템을 완전히 제어하여 추가적인 악성 행위를 수행하거나 다른 내부 시스템으로 확산될 수 있는 심각한 결과를 초래합니다. 공격자는 별도의 인증 절차 없이 이 공격을 실행할 수 있습니다.</p>
+<p><strong>패치 우선순위</strong>: CVSS 점수가 9.8점으로 매우 높으며, CISA에서 즉시 완화 조치를 권고하고 2026년 8월 7일까지 패치 기한을 제시했으므로 최우선으로 패치를 적용해야 합니다. CISA의 BOD 26-04(위험 기반 보안 업데이트 우선순위 지정) 지침을 준수하여 신속하게 조치해야 합니다.</p>
 <p><strong>공식 패치·완화조치(CISA 권고)</strong>: Apply mitigations in accordance with vendor instructions, ensuring compliance with CISA’s BOD 26-04 Prioritizing Security Updates Based on Risk (see URL in Notes) guidance and CISA’s “Forensics Triage Requirements” (see URL in Notes). Follow applicable BOD 26-04 guidance for cloud services or discontinue use of the product if mitigations are unavailable. Stakeholders are responsible for evaluating each asset's internet exposure and ensuring adherence to BOD 26-04 patching guidelines.</p>
 <p><strong>운영자 확인 사항</strong>:
-- IBM Langflow 시스템이 영향을 받는 버전 범위(1.0.0 이상 1.10.1 미만)에 해당하는지 확인하십시오.
-- 벤더(IBM)에서 제공하는 보안 업데이트 또는 완화 조치 지침을 즉시 확인하고 적용하십시오.
-- CISA의 BOD 26-04 '위험 기반 보안 업데이트 우선순위 지정' 지침 및 '포렌식 트리아지 요구사항'을 검토하고, 이에 따라 자산의 인터넷 노출 여부를 평가하여 적절한 조치를 취하십시오.
-- 만약 적절한 완화 조치를 적용할 수 없는 경우, 해당 제품의 사용 중단을 고려하거나 CISA의 BOD 26-04 클라우드 서비스 관련 지침을 따르십시오.
-- 시스템에 비정상적인 접근 시도나 악성 활동 흔적이 있는지 보안 로그를 주기적으로 확인하고 모니터링하십시오.</p>
+- 영향받는 IBM Langflow 버전(1.0.0 이상 1.10.1 미만)을 사용 중인지 즉시 확인합니다.
+- IBM Langflow 벤더가 제공하는 최신 보안 패치 또는 업데이트를 확인하고 지침에 따라 즉시 적용합니다.
+- 현재 사용 중인 Langflow 배포 환경이 인터넷에 노출되어 있는지 확인하고, 노출되어 있다면 잠재적 위협에 대한 모니터링을 강화합니다.
+- 벤더 패치 또는 완화 조치가 제공되지 않는 경우, CISA 권고에 따라 제품 사용 중단을 고려합니다.
+- CISA의 'Forensics Triage Requirements' 지침에 따라 잠재적 침해에 대비한 포렌식 준비 태세를 점검하고 관련 로그를 확보합니다.</p>
 <p><strong>참고 자료</strong>:
 - <a href="https://www.ibm.com/support/pages/node/7278927">https://www.ibm.com/support/pages/node/7278927</a>
 - <a href="https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk">https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk</a>
@@ -101,17 +101,16 @@
 <li><strong>영향 버전(NVD 기준)</strong>: apache/tomcat 9.0.116; apache/tomcat 10.1.53; apache/tomcat 11.0.20; redhat/jboss_web_server 7.0.0; redhat/enterprise_linux 8.0; redhat/enterprise_linux 9.0; redhat/enterprise_linux 10.0; redhat/enterprise_linux_els 7.0; redhat/enterprise_linux_eus 10.0; redhat/enterprise_linux_tus 8.8; redhat/enterprise_linux_update_services_for_sap_solutions 8.8; redhat/enterprise_linux_update_services_for_sap_solutions 9.2; redhat/enterprise_linux_update_services_for_sap_solutions 9.4; redhat/enterprise_linux_update_services_for_sap_solutions 9.6</li>
 <li><strong>랜섬웨어 연관</strong>: Unknown</li>
 </ul>
-<p><strong>개요</strong>: CVE-2026-34486은 Apache Tomcat 제품군에서 발견된 민감한 데이터 암호화 누락 취약점입니다. 이 취약점으로 인해 EncryptInterceptor(데이터 암호화를 담당하는 구성 요소)를 우회할 수 있어, 암호화되어야 할 민감한 데이터가 보호되지 않을 수 있습니다.</p>
-<p><strong>공격 영향</strong>: 이 취약점은 EncryptInterceptor의 우회를 허용하여, 시스템 내에서 암호화되어야 할 민감한 데이터가 암호화되지 않은 채로 노출될 위험을 증가시킵니다. 공격자는 이 취약점을 악용하여 보호되지 않는 민감한 정보를 획득할 수 있습니다. 어떤 종류의 민감한 데이터가 영향을 받는지, 그리고 구체적으로 어떻게 데이터가 노출될 수 있는지에 대한 시나리오는 제공된 데이터에 명시되지 않았습니다.</p>
-<p><strong>패치 우선순위</strong>: CVE-2026-34486은 CVSS v3.1 점수 7.5점으로 '높음(HIGH)' 심각도에 해당합니다. CISA는 벤더 지침에 따라 완화 조치를 적용하고 CISA BOD 26-04 가이드라인을 준수할 것을 권고하고 있으며, 패치 기한은 2026년 8월 7일까지입니다. 따라서 이 취약점은 높은 우선순위로 패치 및 완화 조치를 적용해야 합니다.</p>
+<p><strong>개요</strong>: CVE-2026-34486은 Apache Tomcat에서 민감한 데이터 암호화 누락으로 인해 EncryptInterceptor(데이터 암호화를 담당하는 구성 요소)를 우회할 수 있는 취약점입니다. 이 취약점이 악용되면, 암호화되어야 할 민감한 데이터가 보호되지 않은 상태로 노출될 수 있습니다.</p>
+<p><strong>공격 영향</strong>: 공격자가 이 취약점을 악용하면 Apache Tomcat의 EncryptInterceptor를 우회하여 암호화되지 않은 민감한 데이터를 탈취할 수 있습니다. 이는 시스템 내에 저장되거나 전송되는 사용자 정보, 설정 데이터 등 보호되어야 할 정보가 외부에 노출될 위험을 증가시킵니다. 데이터 유출로 인한 심각한 비즈니스 및 규제 준수 문제가 발생할 수 있습니다.</p>
+<p><strong>패치 우선순위</strong>: 높음 (HIGH) - CVSS 점수 7.5점으로 높고, CISA는 패치 적용 및 완화 조치를 권고하며 2026년 8월 7일까지의 기한을 제시했습니다. 랜섬웨어 연관성은 제공된 데이터에 명시되지 않았습니다.</p>
 <p><strong>공식 패치·완화조치(CISA 권고)</strong>: Apply mitigations in accordance with vendor instructions, ensuring compliance with CISA’s BOD 26-04 Prioritizing Security Updates Based on Risk (see URL in Notes) guidance and CISA’s “Forensics Triage Requirements” (see URL in Notes). Follow applicable BOD 26-04 guidance for cloud services or discontinue use of the product if mitigations are unavailable. Stakeholders are responsible for evaluating each asset's internet exposure and ensuring adherence to BOD 26-04 patching guidelines.</p>
 <p><strong>운영자 확인 사항</strong>:
-- 운영 중인 시스템에 위에 명시된 Apache Tomcat 및 Red Hat 관련 제품 및 버전이 사용되고 있는지 확인합니다.
-- 영향받는 시스템에 대해 Apache 및 Red Hat 벤더의 공식 패치 또는 보안 업데이트가 존재하는지 확인하고 즉시 적용합니다.
-- CISA BOD 26-04(위험 기반 보안 업데이트 우선순위 지정) 가이드라인에 따라 본 취약점의 보안 업데이트 및 완화 조치를 우선적으로 적용합니다.
-- 클라우드 서비스를 이용하는 경우, 해당 서비스에 대한 BOD 26-04 지침을 준수하고 있는지 확인합니다.
-- 만약 적용 가능한 완화 조치가 없는 경우, 해당 제품의 사용 중단을 고려합니다.
-- 모든 자산의 인터넷 노출 여부를 평가하고, BOD 26-04 패치 지침 준수 여부를 확인합니다.</p>
+- 현재 운영 중인 Apache Tomcat 및 Red Hat 제품/버전이 CVE-2026-34486에 해당하는지 확인하십시오.
+- 영향받는 시스템에 대해 벤더사(Apache, Red Hat)에서 제공하는 최신 패치 및 보안 업데이트를 적용하십시오.
+- CISA의 BOD 26-04(위험 기반 보안 업데이트 우선순위 지정) 지침을 준수하여 패치 적용 및 완화 조치가 이루어졌는지 확인하십시오.
+- 영향받는 자산의 인터넷 노출 여부를 평가하고, 외부 노출이 있는 경우 추가적인 보안 강화 조치를 검토하십시오.
+- 패치 적용이 불가능한 경우, CISA 권고에 따라 해당 제품의 사용 중단을 검토하거나 다른 완화 방안을 마련하십시오.</p>
 <p><strong>참고 자료</strong>:
 - <a href="https://lists.apache.org/thread/9510k5p5zdvt9pkkgtyp85mvwxo2qrly">https://lists.apache.org/thread/9510k5p5zdvt9pkkgtyp85mvwxo2qrly</a>
 - <a href="https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk">https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk</a>
@@ -122,19 +121,20 @@
 <li><strong>CVSS</strong>: 7.4 <span class="severity-badge sev-high">HIGH</span></li>
 <li><strong>KEV 등재</strong>: 예 (등재일 2026-08-04, 패치 기한 2026-08-07)</li>
 <li><strong>영향 제품</strong>: N-able N-central</li>
-<li><strong>영향 버전(NVD 기준)</strong>: N-able N-central 제품의 2026.1 이하 버전이 영향을 받습니다. 제공된 데이터에 상세 버전 정보는 명시되지 않았습니다.</li>
+<li><strong>영향 버전(NVD 기준)</strong>: N-able N-central 버전 2026.1 이하 버전에 영향을 미칩니다. 제공된 데이터에 상세 버전 정보는 명시되지 않았습니다.</li>
 <li><strong>랜섬웨어 연관</strong>: Unknown</li>
 </ul>
-<p><strong>개요</strong>: CVE-2026-18556은 N-able N-central 제품에서 발견된 인증 우회(정상적인 인증 절차를 거치지 않고 시스템에 접근하는 것) 취약점입니다. 공격자는 이 취약점을 이용해 시스템의 인증 메커니즘을 우회하고 비인가된 접근 권한을 얻을 수 있습니다.</p>
-<p><strong>공격 영향</strong>: 이 취약점이 성공적으로 악용될 경우, 공격자는 N-able N-central 시스템에 대한 비인가된 접근 권한을 획득할 수 있습니다. 이는 시스템의 관리 기능에 대한 통제권을 얻거나, 민감한 정보에 접근하는 등 심각한 보안 침해로 이어질 수 있습니다.</p>
-<p><strong>패치 우선순위</strong>: 이 취약점은 CVSS v3.1 점수 7.4점으로 '높음(HIGH)' 심각도에 해당합니다. CISA(미국 사이버보안 및 인프라 보안국)는 이 취약점에 대해 2026년 8월 7일까지 패치 또는 완화 조치를 적용할 것을 권고하고 있습니다. KEV(Known Exploited Vulnerabilities) 등재 여부 및 랜섬웨어 연관 여부는 제공된 데이터에 명시되지 않았으나, 높은 CVSS 점수와 CISA의 긴급한 권고를 고려할 때 최우선적으로 패치 및 완화 조치를 적용해야 합니다.</p>
+<p><strong>개요</strong>: CVE-2026-18556은 N-able N-central 제품에서 발생하는 인증 우회(Authentication Bypass) 취약점입니다. 공격자는 이 취약점을 이용해 정상적인 인증 과정을 거치지 않고 시스템에 접근할 수 있습니다. 이는 대체 경로 또는 채널을 사용한 인증 우회 방식입니다.</p>
+<p><strong>공격 영향</strong>: 이 취약점이 악용될 경우, 공격자는 유효한 사용자 계정 정보 없이 N-able N-central 시스템에 무단으로 접근할 수 있습니다. 이는 시스템의 기밀성, 무결성, 가용성에 직접적인 위협을 가하며, 인증되지 않은 접근으로 인해 시스템 구성 변경, 데이터 유출, 추가적인 악성 활동으로 이어질 수 있습니다.</p>
+<p><strong>패치 우선순위</strong>: CVSSv3.1 점수가 7.4점으로 '높음' 수준이며, CISA가 2026년 8월 7일까지 패치를 권고하는 점을 고려할 때, 즉시 패치를 적용하거나 완화 조치를 취해야 하는 높은 우선순위 취약점입니다. 랜섬웨어 연관성은 현재 알려지지 않았습니다.</p>
 <p><strong>공식 패치·완화조치(CISA 권고)</strong>: Apply mitigations in accordance with vendor instructions, ensuring compliance with CISA’s BOD 26-04 Prioritizing Security Updates Based on Risk (see URL in Notes) guidance and CISA’s “Forensics Triage Requirements” (see URL in Notes). Follow applicable BOD 26-04 guidance for cloud services or discontinue use of the product if mitigations are unavailable. Stakeholders are responsible for evaluating each asset's internet exposure and ensuring adherence to BOD 26-04 patching guidelines.</p>
 <p><strong>운영자 확인 사항</strong>:
-- 현재 운영 중인 N-able N-central 시스템이 CVE-2026-18556의 영향을 받는 버전(2026.1 이하)에 해당하는지 확인하십시오.
-- N-able N-central 벤더사(N-able)가 제공하는 최신 패치 또는 보안 업데이트를 신속하게 적용하십시오.
-- CISA의 BOD 26-04(위험 기반 보안 업데이트 우선순위 지정) 지침을 준수하여 패치 또는 완화 조치를 진행하십시오.
-- N-able N-central 시스템의 인터넷 노출 여부를 평가하고, 불필요한 경우 외부 접근을 제한하는 보안 설정을 강화하십시오.
-- 만약 벤더사로부터 즉각적인 패치나 효과적인 완화 조치를 제공받을 수 없는 경우, CISA 권고에 따라 해당 제품의 사용 중단을 검토하십시오.</p>
+- N-able N-central 시스템의 버전이 취약점에 해당하는지 확인합니다.
+- N-able에서 제공하는 공식 패치 또는 업데이트를 적용하여 취약점을 해결합니다.
+- 공급업체(N-able)의 지침에 따라 완화 조치를 즉시 적용합니다.
+- CISA의 BOD 26-04(위험 기반 보안 업데이트 우선순위 지정) 지침 및 CISA의 '포렌식 분류 요구 사항'을 준수하여 조치를 이행합니다.
+- 시스템의 인터넷 노출 여부를 평가하고, 인터넷에 노출된 경우 보안 강화 조치를 적용합니다.
+- 만약 완화 조치가 불가능하다면, CISA의 권고에 따라 제품 사용을 중단하는 것을 고려합니다.</p>
 <p><strong>참고 자료</strong>:
 - <a href="https://uptime.n-able.com/">https://uptime.n-able.com/</a>
 - <a href="https://status.n-able.com/2026/08/02/n-central-2026-3-hotfix-1-mitigation-for-cve-2026-18577/">https://status.n-able.com/2026/08/02/n-central-2026-3-hotfix-1-mitigation-for-cve-2026-18577/</a>
@@ -146,19 +146,20 @@
 <li><strong>CVSS</strong>: 8.1 <span class="severity-badge sev-high">HIGH</span></li>
 <li><strong>KEV 등재</strong>: 예 (등재일 2026-08-03, 패치 기한 2026-08-06)</li>
 <li><strong>영향 제품</strong>: N-able N-central</li>
-<li><strong>영향 버전(NVD 기준)</strong>: N-able N-central 제품 2026.3 미만 버전 및 2026.3 버전이 이 취약점에 영향을 받습니다. 특정 버전 정보가 명시되지 않은 2026.3 미만 모든 버전이 포함됩니다.</li>
+<li><strong>영향 버전(NVD 기준)</strong>: N-able N-central의 2026.3 미만 모든 버전 및 2026.3 버전이 이 취약점에 영향을 받습니다. 상세 버전 정보는 제공된 데이터에 명시되지 않았습니다.</li>
 <li><strong>랜섬웨어 연관</strong>: Unknown</li>
 </ul>
-<p><strong>개요</strong>: N-able N-central 제품에서 인증 우회 취약점(CVE-2026-18577)이 발견되었습니다. 이 취약점은 CVE-2026-18556에 대한 불완전한 패치로 인해 발생하며, 공격자가 대체 경로를 통해 인증 절차를 우회하여 계정을 탈취할 수 있도록 합니다.</p>
-<p><strong>공격 영향</strong>: 이 취약점이 악용될 경우, 공격자는 시스템의 인증 절차를 우회하여 정상적인 사용자처럼 접근할 수 있습니다. 이는 계정 탈취(Account Takeover)로 이어질 수 있으며, 공격자는 탈취한 계정을 이용해 시스템에 대한 광범위한 접근 권한을 획득하고 중요 데이터를 유출하거나 시스템을 조작하는 등 심각한 피해를 발생시킬 수 있습니다. CVSS v3.1 점수 8.1점으로 위험도가 높은(HIGH) 취약점입니다.</p>
-<p><strong>패치 우선순위</strong>: 이 취약점은 CVSS v3.1 점수 8.1점(높음)으로 평가되며, CISA에서 권고 조치를 발표하고 2026년 8월 6일까지 패치 기한을 명시한 점을 고려할 때, 최우선적으로 패치를 적용해야 합니다. 랜섬웨어 연관성은 제공된 데이터에 명시되지 않았습니다.</p>
+<p><strong>개요</strong>: N-able N-central 제품에서 인증 우회(Authentication Bypass) 취약점(CVE-2026-18577)이 발견되었습니다. 이 취약점은 기존 CVE-2026-18556에 대한 불완전한 패치로 인해 발생했으며, 공격자가 대체 경로 또는 채널을 사용하여 시스템의 인증 절차를 우회하고 계정을 탈취(Account Takeover)할 수 있도록 허용합니다.</p>
+<p><strong>공격 영향</strong>: 공격자는 이 취약점을 이용해 N-able N-central 시스템의 인증 절차를 우회하고 관리자 또는 일반 사용자의 계정을 탈취할 수 있습니다. 계정 탈취에 성공하면 공격자는 해당 계정의 권한으로 N-central 시스템에 접근하여 시스템을 제어하거나, N-central을 통해 관리되는 다른 시스템에도 영향을 미칠 수 있습니다. 이는 시스템의 기밀성, 무결성, 가용성에 심각한 영향을 줄 수 있습니다.</p>
+<p><strong>패치 우선순위</strong>: 이 취약점은 CVSS 점수 8.1(높음)로 심각도가 높으며, 인증 우회 및 계정 탈취가 가능하다는 점에서 보안에 매우 치명적입니다. CISA는 벤더 지침에 따른 완화 조치 적용 및 2026년 8월 6일까지의 패치 기한을 권고하고 있습니다. 랜섬웨어 연관성은 제공된 데이터에 명시되지 않았습니다. 종합적으로 판단할 때, 해당 취약점은 최우선으로 패치 및 대응이 필요합니다.</p>
 <p><strong>공식 패치·완화조치(CISA 권고)</strong>: Apply mitigations in accordance with vendor instructions, ensuring compliance with CISA’s BOD 26-04 Prioritizing Security Updates Based on Risk (see URL in Notes) guidance and CISA’s “Forensics Triage Requirements” (see URL in Notes). Follow applicable BOD 26-04 guidance for cloud services or discontinue use of the product if mitigations are unavailable. Stakeholders are responsible for evaluating each asset's internet exposure and ensuring adherence to BOD 26-04 patching guidelines.</p>
 <p><strong>운영자 확인 사항</strong>:
-- 운영 중인 N-able N-central 시스템의 버전을 확인하고, 이 취약점의 영향을 받는지 확인합니다.
-- N-able N-central 벤더가 제공하는 최신 보안 업데이트를 확인하고, 벤더 지침에 따라 즉시 적용합니다.
-- CISA의 BOD 26-04(위험 기반 보안 업데이트 우선순위 지정) 지침 및 'Forensics Triage Requirements'를 참고하여 보안 업데이트 및 관련 조치들을 우선순위에 따라 수행합니다.
-- 시스템의 인터넷 노출 여부를 평가하고, CISA의 BOD 26-04 패치 지침을 준수합니다.
-- 만약 적절한 완화 조치를 적용할 수 없을 경우, 해당 제품의 사용 중단을 고려합니다.</p>
+- 현재 운영 중인 N-able N-central 시스템의 버전을 즉시 확인합니다.
+- N-able N-central 벤더에서 제공하는 최신 패치 및 보안 업데이트를 확인하고, 가용한 즉시 적용합니다.
+- N-able N-central 시스템 접근 기록, 특히 비정상적인 로그인 시도 또는 계정 활동이 있는지 주기적으로 모니터링합니다.
+- 모든 N-able N-central 계정에 대해 강력한 암호를 사용하고, 가능하면 다단계 인증을 활성화하여 추가 보안 계층을 확보합니다.
+- N-able N-central 시스템이 인터넷에 직접 노출되어 있는지 확인하고, 필요 시 접근 제어 목록(ACL) 또는 방화벽 규칙을 강화하여 외부로부터의 접근을 최소화합니다.
+- CISA의 권고에 따라, 벤더 지침을 따르고 완화 조치가 불가능할 경우 제품 사용 중단을 고려합니다.</p>
 <p><strong>참고 자료</strong>:
 - <a href="https://documentation.n-able.com/N-central/Release_Notes/GA/Content/N-central_2026.3_HF1_Release_Notes.htm">https://documentation.n-able.com/N-central/Release_Notes/GA/Content/N-central_2026.3_HF1_Release_Notes.htm</a>
 - <a href="https://status.n-able.com/2026/08/02/n-central-2026-3-hotfix-1-mitigation-for-cve-2026-18577/">https://status.n-able.com/2026/08/02/n-central-2026-3-hotfix-1-mitigation-for-cve-2026-18577/</a>
@@ -170,19 +171,18 @@
 <li><strong>CVSS</strong>: 10.0 <span class="severity-badge sev-critical">CRITICAL</span></li>
 <li><strong>KEV 등재</strong>: 예 (등재일 2026-07-27, 패치 기한 2026-07-30)</li>
 <li><strong>영향 제품</strong>: Arista VeloCloud Orchestrator</li>
-<li><strong>영향 버전(NVD 기준)</strong>: Arista VeloCloud Orchestrator 5.2.0 이상 5.2.3.14 미만 버전, 6.1.0 이상 6.1.3.4 미만 버전, 6.4.0 이상 6.4.2.4 미만 버전, 그리고 7.0.0 버전이 영향을 받습니다.</li>
+<li><strong>영향 버전(NVD 기준)</strong>: arista/velocloud_orchestrator의 버전 정보 없음 5.2.0 이상 5.2.3.14 미만; arista/velocloud_orchestrator의 버전 정보 없음 6.1.0 이상 6.1.3.4 미만; arista/velocloud_orchestrator의 버전 정보 없음 6.4.0 이상 6.4.2.4 미만; arista/velocloud_orchestrator 7.0.0 버전이 영향을 받습니다.</li>
 <li><strong>랜섬웨어 연관</strong>: Unknown</li>
 </ul>
-<p><strong>개요</strong>: CVE-2026-16812는 Arista VeloCloud Orchestrator On-Prem에서 발견된 심각한 운영체제 명령어 삽입(OS Command Injection) 취약점입니다. 이 취약점을 이용하면 원격 공격자가 시스템의 특권 기능을 사용하고 Arista VeloCloud Orchestrator 호스트에 영향을 줄 수 있습니다. 이 취약점의 CVSS 점수는 10.0으로, 기밀성, 무결성, 가용성에 심각한 영향을 미칠 수 있습니다.</p>
-<p><strong>공격 영향</strong>: 이 취약점은 운영체제 명령어 삽입(외부에서 받은 입력값을 통해 시스템 명령어를 실행하도록 조작하는 공격)을 허용합니다. 공격자가 성공적으로 이 취약점을 악용하면, Arista VeloCloud Orchestrator On-Prem 시스템 내에서 임의의 운영체제 명령어를 실행할 수 있습니다. 이는 공격자가 시스템의 특권 기능에 접근하여 오케스트레이터 호스트를 완전히 제어할 수 있게 만들 수 있습니다. 결과적으로, 오케스트레이터 자체와 오케스트레이터가 관리하는 모든 데이터의 기밀성(민감 정보 유출), 무결성(데이터 변조 또는 삭제), 가용성(서비스 중단)이 심각하게 침해될 수 있습니다.</p>
-<p><strong>패치 우선순위</strong>: CVSS v3.1 점수가 10.0으로 심각(CRITICAL)하며, CISA가 즉각적인 완화 조치를 권고하고 2026년 7월 30일까지 패치 기한을 명시했으므로, 이 취약점의 패치 우선순위는 '즉시'입니다. KEV(Known Exploited Vulnerabilities) 카탈로그 등재 여부 및 랜섬웨어 연관성은 제공된 데이터에 명시되지 않았습니다.</p>
+<p><strong>개요</strong>: Arista VeloCloud Orchestrator On-Prem 제품에서 OS 명령어 삽입 취약점(OS Command Injection)이 발견되었습니다. 이 취약점을 통해 원격 공격자가 특권이 필요한 내부 기능에 접근하여 오케스트레이터 호스트에 영향을 줄 수 있습니다. 이 공격은 오케스트레이터와 오케스트레이터가 관리하는 데이터의 기밀성, 무결성, 가용성에 심각한 영향을 미칠 수 있습니다.</p>
+<p><strong>공격 영향</strong>: 성공적으로 악용될 경우, 원격 공격자는 시스템의 운영체제 명령을 실행하여 Arista VeloCloud Orchestrator의 특권이 필요한 내부 기능에 접근할 수 있습니다. 이는 오케스트레이터 시스템 자체와 오케스트레이터가 관리하는 모든 데이터의 기밀성(정보 유출), 무결성(데이터 변조), 가용성(서비스 중단)을 심각하게 손상시킬 수 있습니다.</p>
+<p><strong>패치 우선순위</strong>: CVSS 점수가 10.0으로 매우 심각(CRITICAL)하며, CISA KEV(Known Exploited Vulnerabilities) 카탈로그 등재 여부는 제공된 데이터에 명시되지 않았습니다. 랜섬웨어 연관 여부 또한 알 수 없습니다. 그러나 CISA가 권고하는 패치 기한이 2026년 7월 30일까지로 명확하며, CISA BOD 26-04 지침에 따라 보안 업데이트 우선순위를 정할 것을 강조하고 있으므로, 즉시 패치를 적용하거나 완화 조치를 취해야 하는 최고 우선순위 취약점입니다.</p>
 <p><strong>공식 패치·완화조치(CISA 권고)</strong>: Apply mitigations in accordance with vendor instructions, ensuring compliance with CISA’s BOD 26-04 Prioritizing Security Updates Based on Risk (see URL in Notes) guidance and CISA’s “Forensics Triage Requirements” (see URL in Notes). Follow applicable BOD 26-04 guidance for cloud services or discontinue use of the product if mitigations are unavailable. Stakeholders are responsible for evaluating each asset's internet exposure and ensuring adherence to BOD 26-04 patching guidelines.</p>
 <p><strong>운영자 확인 사항</strong>:
-- 조직 내에서 Arista VeloCloud Orchestrator On-Prem 제품을 사용 중인지 확인하십시오.
-- 사용 중인 Arista VeloCloud Orchestrator On-Prem의 버전을 확인하여 영향을 받는 버전에 해당하는지 파악하십시오.
-- 영향을 받는 시스템을 식별한 경우, 벤더(Arista)에서 제공하는 공식 패치 또는 완화 조치 지침을 즉시 확인하고 적용하십시오.
-- 인터넷에 노출된 Arista VeloCloud Orchestrator On-Prem 시스템이 있다면 최우선으로 패치를 적용하거나 접근 제어를 강화하십시오.
-- CISA의 BOD 26-04(위험 기반 보안 업데이트 우선순위 지정) 지침을 준수하여 보안 업데이트를 진행하고, 완화 조치가 불가능할 경우 CISA 권고에 따라 제품 사용 중단을 고려하십시오.</p>
+- 제조사 지침에 따라 해당 취약점에 대한 완화 조치를 적용하십시오.
+- CISA BOD 26-04 지침 및 CISA의 '포렌식 트리아지 요구사항'을 준수하여 필요한 보안 업데이트를 우선 적용하십시오.
+- 클라우드 서비스의 경우 해당 BOD 26-04 지침을 따르거나, 완화 조치가 불가능할 경우 제품 사용을 중단하십시오.
+- 조직 내 각 자산의 인터넷 노출 여부를 평가하고, BOD 26-04 패치 지침을 철저히 준수하고 있는지 확인하십시오.</p>
 <p><strong>참고 자료</strong>:
 - <a href="https://www.arista.com/en/support/advisories-notices/security-advisory/24364-security-advisory-0144">https://www.arista.com/en/support/advisories-notices/security-advisory/24364-security-advisory-0144</a>
 - <a href="https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk">https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk</a>
@@ -196,32 +196,32 @@
 </ul>
 <h2>운영자 체크리스트 (종합)</h2>
 <ul>
-<li>IBM Langflow 시스템이 영향을 받는 버전 범위(1.0.0 이상 1.10.1 미만)에 해당하는지 확인하십시오.</li>
-<li>벤더(IBM)에서 제공하는 보안 업데이트 또는 완화 조치 지침을 즉시 확인하고 적용하십시오.</li>
-<li>CISA의 BOD 26-04 '위험 기반 보안 업데이트 우선순위 지정' 지침 및 '포렌식 트리아지 요구사항'을 검토하고, 이에 따라 자산의 인터넷 노출 여부를 평가하여 적절한 조치를 취하십시오.</li>
-<li>만약 적절한 완화 조치를 적용할 수 없는 경우, 해당 제품의 사용 중단을 고려하거나 CISA의 BOD 26-04 클라우드 서비스 관련 지침을 따르십시오.</li>
-<li>시스템에 비정상적인 접근 시도나 악성 활동 흔적이 있는지 보안 로그를 주기적으로 확인하고 모니터링하십시오.</li>
-<li>운영 중인 시스템에 위에 명시된 Apache Tomcat 및 Red Hat 관련 제품 및 버전이 사용되고 있는지 확인합니다.</li>
-<li>영향받는 시스템에 대해 Apache 및 Red Hat 벤더의 공식 패치 또는 보안 업데이트가 존재하는지 확인하고 즉시 적용합니다.</li>
-<li>CISA BOD 26-04(위험 기반 보안 업데이트 우선순위 지정) 가이드라인에 따라 본 취약점의 보안 업데이트 및 완화 조치를 우선적으로 적용합니다.</li>
-<li>클라우드 서비스를 이용하는 경우, 해당 서비스에 대한 BOD 26-04 지침을 준수하고 있는지 확인합니다.</li>
-<li>만약 적용 가능한 완화 조치가 없는 경우, 해당 제품의 사용 중단을 고려합니다.</li>
-<li>모든 자산의 인터넷 노출 여부를 평가하고, BOD 26-04 패치 지침 준수 여부를 확인합니다.</li>
-<li>현재 운영 중인 N-able N-central 시스템이 CVE-2026-18556의 영향을 받는 버전(2026.1 이하)에 해당하는지 확인하십시오.</li>
-<li>N-able N-central 벤더사(N-able)가 제공하는 최신 패치 또는 보안 업데이트를 신속하게 적용하십시오.</li>
-<li>CISA의 BOD 26-04(위험 기반 보안 업데이트 우선순위 지정) 지침을 준수하여 패치 또는 완화 조치를 진행하십시오.</li>
-<li>N-able N-central 시스템의 인터넷 노출 여부를 평가하고, 불필요한 경우 외부 접근을 제한하는 보안 설정을 강화하십시오.</li>
-<li>만약 벤더사로부터 즉각적인 패치나 효과적인 완화 조치를 제공받을 수 없는 경우, CISA 권고에 따라 해당 제품의 사용 중단을 검토하십시오.</li>
-<li>운영 중인 N-able N-central 시스템의 버전을 확인하고, 이 취약점의 영향을 받는지 확인합니다.</li>
-<li>N-able N-central 벤더가 제공하는 최신 보안 업데이트를 확인하고, 벤더 지침에 따라 즉시 적용합니다.</li>
-<li>CISA의 BOD 26-04(위험 기반 보안 업데이트 우선순위 지정) 지침 및 'Forensics Triage Requirements'를 참고하여 보안 업데이트 및 관련 조치들을 우선순위에 따라 수행합니다.</li>
-<li>시스템의 인터넷 노출 여부를 평가하고, CISA의 BOD 26-04 패치 지침을 준수합니다.</li>
-<li>만약 적절한 완화 조치를 적용할 수 없을 경우, 해당 제품의 사용 중단을 고려합니다.</li>
-<li>조직 내에서 Arista VeloCloud Orchestrator On-Prem 제품을 사용 중인지 확인하십시오.</li>
-<li>사용 중인 Arista VeloCloud Orchestrator On-Prem의 버전을 확인하여 영향을 받는 버전에 해당하는지 파악하십시오.</li>
-<li>영향을 받는 시스템을 식별한 경우, 벤더(Arista)에서 제공하는 공식 패치 또는 완화 조치 지침을 즉시 확인하고 적용하십시오.</li>
-<li>인터넷에 노출된 Arista VeloCloud Orchestrator On-Prem 시스템이 있다면 최우선으로 패치를 적용하거나 접근 제어를 강화하십시오.</li>
-<li>CISA의 BOD 26-04(위험 기반 보안 업데이트 우선순위 지정) 지침을 준수하여 보안 업데이트를 진행하고, 완화 조치가 불가능할 경우 CISA 권고에 따라 제품 사용 중단을 고려하십시오.</li>
+<li>영향받는 IBM Langflow 버전(1.0.0 이상 1.10.1 미만)을 사용 중인지 즉시 확인합니다.</li>
+<li>IBM Langflow 벤더가 제공하는 최신 보안 패치 또는 업데이트를 확인하고 지침에 따라 즉시 적용합니다.</li>
+<li>현재 사용 중인 Langflow 배포 환경이 인터넷에 노출되어 있는지 확인하고, 노출되어 있다면 잠재적 위협에 대한 모니터링을 강화합니다.</li>
+<li>벤더 패치 또는 완화 조치가 제공되지 않는 경우, CISA 권고에 따라 제품 사용 중단을 고려합니다.</li>
+<li>CISA의 'Forensics Triage Requirements' 지침에 따라 잠재적 침해에 대비한 포렌식 준비 태세를 점검하고 관련 로그를 확보합니다.</li>
+<li>현재 운영 중인 Apache Tomcat 및 Red Hat 제품/버전이 CVE-2026-34486에 해당하는지 확인하십시오.</li>
+<li>영향받는 시스템에 대해 벤더사(Apache, Red Hat)에서 제공하는 최신 패치 및 보안 업데이트를 적용하십시오.</li>
+<li>CISA의 BOD 26-04(위험 기반 보안 업데이트 우선순위 지정) 지침을 준수하여 패치 적용 및 완화 조치가 이루어졌는지 확인하십시오.</li>
+<li>영향받는 자산의 인터넷 노출 여부를 평가하고, 외부 노출이 있는 경우 추가적인 보안 강화 조치를 검토하십시오.</li>
+<li>패치 적용이 불가능한 경우, CISA 권고에 따라 해당 제품의 사용 중단을 검토하거나 다른 완화 방안을 마련하십시오.</li>
+<li>N-able N-central 시스템의 버전이 취약점에 해당하는지 확인합니다.</li>
+<li>N-able에서 제공하는 공식 패치 또는 업데이트를 적용하여 취약점을 해결합니다.</li>
+<li>공급업체(N-able)의 지침에 따라 완화 조치를 즉시 적용합니다.</li>
+<li>CISA의 BOD 26-04(위험 기반 보안 업데이트 우선순위 지정) 지침 및 CISA의 '포렌식 분류 요구 사항'을 준수하여 조치를 이행합니다.</li>
+<li>시스템의 인터넷 노출 여부를 평가하고, 인터넷에 노출된 경우 보안 강화 조치를 적용합니다.</li>
+<li>만약 완화 조치가 불가능하다면, CISA의 권고에 따라 제품 사용을 중단하는 것을 고려합니다.</li>
+<li>현재 운영 중인 N-able N-central 시스템의 버전을 즉시 확인합니다.</li>
+<li>N-able N-central 벤더에서 제공하는 최신 패치 및 보안 업데이트를 확인하고, 가용한 즉시 적용합니다.</li>
+<li>N-able N-central 시스템 접근 기록, 특히 비정상적인 로그인 시도 또는 계정 활동이 있는지 주기적으로 모니터링합니다.</li>
+<li>모든 N-able N-central 계정에 대해 강력한 암호를 사용하고, 가능하면 다단계 인증을 활성화하여 추가 보안 계층을 확보합니다.</li>
+<li>N-able N-central 시스템이 인터넷에 직접 노출되어 있는지 확인하고, 필요 시 접근 제어 목록(ACL) 또는 방화벽 규칙을 강화하여 외부로부터의 접근을 최소화합니다.</li>
+<li>CISA의 권고에 따라, 벤더 지침을 따르고 완화 조치가 불가능할 경우 제품 사용 중단을 고려합니다.</li>
+<li>제조사 지침에 따라 해당 취약점에 대한 완화 조치를 적용하십시오.</li>
+<li>CISA BOD 26-04 지침 및 CISA의 '포렌식 트리아지 요구사항'을 준수하여 필요한 보안 업데이트를 우선 적용하십시오.</li>
+<li>클라우드 서비스의 경우 해당 BOD 26-04 지침을 따르거나, 완화 조치가 불가능할 경우 제품 사용을 중단하십시오.</li>
+<li>조직 내 각 자산의 인터넷 노출 여부를 평가하고, BOD 26-04 패치 지침을 철저히 준수하고 있는지 확인하십시오.</li>
 </ul>
 <h2>오늘의 핵심 요약</h2>
 <p>오늘은 CVE-2026-9198, CVE-2026-34486, CVE-2026-18556, CVE-2026-18577, CVE-2026-16812 총 5건의 KEV 등재 취약점을 다뤘습니다. 평균 CVSS 8.6, 랜섬웨어 연관 0건입니다.</p>
